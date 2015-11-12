@@ -5,5 +5,21 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+# RESTful Routes
+# We allow some CRUD operations on Resources
+
+GET     /user/new                  controllers.User.form()
+POST    /user                      controllers.User.create()
+DELETE  /user/:id                  controllers.User.delete(id: String)
+PUT     /user/:id                  controllers.User.update(id: String)
+GET     /user/:id                  controllers.User.show(id: String)
+
+GET     /tool                      controllers.Tool.index()
+GET     /tool/new                  controllers.Tool.form()
+GET     /tool/:id                  controllers.Tool.show(id: Long)
+DELETE  /tool/:id                  controllers.Tool.delete(id: Long)
+PUT     /tool/:id                  controllers.Tool.update(id: Long)
+POST    /tool                      controllers.Tool.create()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

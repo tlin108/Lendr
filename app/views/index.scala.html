@@ -1,7 +1,16 @@
 @(message: String)
 
-@main("Welcome to Play") {
+@main("CTS") {
 
-    @play20.welcome(message, style = "Java")
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>Welcome to CTS</h1>
+            <br>
+            <br>
+            <a href="" class="btn btn-dark btn-lg">Log In</a>
+            <a href="@routes.User.form()" class="btn btn-dark btn-lg">Sign Up</a>
+        </div>
+    </header>
 
 }
