@@ -3,14 +3,17 @@
 @main("CTS") {
 
     <!-- Header -->
-    <header id="top" class="header">
-        <div class="text-vertical-center">
-            <h1>Welcome to CTS</h1>
-            <br>
-            <br>
-            <a href="" class="btn btn-dark btn-lg">Log In</a>
-            <a href="@routes.User.form()" class="btn btn-dark btn-lg">Sign Up</a>
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Welcome To Tonari!</div>
+                <div class="intro-heading">It's Nice To Meet You</div>
+                <a href="" class="btn btn-xl" id="login">Log In</a>
+                <div class="divider"></div>
+                <a href="@routes.User.form()" class="btn btn-xl" id="signup">Sign Up</a>
+            </div>
         </div>
-    </header>
+    </header> 
+    <!--/Header-->
 
 }
