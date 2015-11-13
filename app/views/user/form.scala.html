@@ -10,7 +10,7 @@
             <p>A Community tool sharing project</p>
 
             <div class="container ">
-            <form class="form-horizontal" role="form" action="@routes.User.create()" method="post">
+            <form class="form-horizontal" role="form" action="@routes.UserAuth.create()" method="post">
                 <h2>Registration Form</h2>
                 <br>
                 <div class="form-group">
@@ -55,9 +55,9 @@
                         <input type="tel" id="phoneNum" name="phoneNum" placeholder="Phone Number" class="form-control">
                     </div>
                 </div>
+                <button type="submit" class="btn btn-xl">Register</button>
             </form> <!-- /form -->
         </div> <!-- ./container -->
-        <button type="submit" class="btn btn-xl">Register</button>
         </div>
     </header>
 }

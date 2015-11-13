@@ -12,7 +12,7 @@ create table tool (
   constraint pk_tool primary key (id))
 ;
 
-create table user (
+create table users (
   id                        varchar(255) not null,
   user_name                 varchar(255),
   password_hash             varchar(255),
@@ -21,27 +21,16 @@ create table user (
   address                   varchar(255),
   phone_num                 varchar(255),
   email                     varchar(255),
-  constraint pk_user primary key (id))
+  constraint uq_users_user_name unique (user_name),
+  constraint pk_users primary key (id))
 ;
-
-create sequence tool_seq;
-
-create sequence user_seq;
 
 
 
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+drop table if exists tool cascade;
 
-drop table if exists tool;
-
-drop table if exists user;
-
-SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists tool_seq;
-
-drop sequence if exists user_seq;
+drop table if exists users cascade;
 

@@ -8,13 +8,18 @@ import com.avaje.ebean.Model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.Constraint;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
+
+@Table(name="users")
 @Entity
 public class User extends Model {
   @Id
   private String id;
 
   @Constraints.Required
+  @Column(unique=true)
   private String userName;
 
   @Constraints.Required
@@ -37,6 +42,13 @@ public class User extends Model {
   // A finder object for easier querying
   private static Finder<Long, User> find = new Finder<Long, User>(User.class);
 
+  public String getUserName(){
+    return userName;
+  }
+
+  public String getID(){
+    return id;
+  }
 
   // NOT FOR PRODUCTION - must ensure this is a valid user first. I have not done that.
   public boolean authenticate(String password) {

@@ -4,14 +4,17 @@ import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.*;
+import models.User;
 
 import java.util.List;
+
+import static play.data.Form.form;
 
 /**
  * This is the User Controller. This is where we implement all of the Action
  * methods related to operations on my User.
  */
-public class User extends Controller {
+public class UserAuth extends Controller {
 
     // Route: GET /user/new
     //  Displays the form for creating a new user account.
@@ -22,7 +25,22 @@ public class User extends Controller {
     // Route: POST /user
     //  Creates a User account from user request input.
     public Result create() {
-        return ok();
+        DynamicForm userForm = Form.form().bindFromRequest();
+        String username = userForm.data().get("userName");
+        String password = userForm.data().get("password");
+
+        User user = User.createNewUser(username, password);
+
+        if(user == null) {
+            flash("error", "Invalid user");
+            return redirect(routes.Application.index());
+        }
+
+        user.save();
+
+        flash("success", "Welcome new user " + user.getUserName());
+        session("user_id", user.getID().toString());
+        return redirect(routes.UserAuth.show(user.getID()));
     }
 
     // Route: DELETE /user/:id

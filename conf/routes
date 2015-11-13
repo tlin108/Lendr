@@ -8,11 +8,11 @@ GET     /                           controllers.Application.index()
 # RESTful Routes
 # We allow some CRUD operations on Resources
 
-GET     /user/new                  controllers.User.form()
-POST    /user                      controllers.User.create()
-DELETE  /user/:id                  controllers.User.delete(id: String)
-PUT     /user/:id                  controllers.User.update(id: String)
-GET     /user/:id                  controllers.User.show(id: String)
+GET     /user/new                  controllers.UserAuth.form()
+POST    /user                      controllers.UserAuth.create()
+DELETE  /user/:id                  controllers.UserAuth.delete(id: String)
+PUT     /user/:id                  controllers.UserAuth.update(id: String)
+GET     /user/:id                  controllers.UserAuth.show(id: String)
 
 GET     /tool                      controllers.Tool.index()
 GET     /tool/new                  controllers.Tool.form()
