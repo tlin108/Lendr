@@ -15,10 +15,12 @@ create table tool (
 create table user (
   id                        varchar(255) not null,
   user_name                 varchar(255),
+  password_hash             varchar(255),
   first_name                varchar(255),
   last_name                 varchar(255),
   address                   varchar(255),
   phone_num                 varchar(255),
+  email                     varchar(255),
   constraint pk_user primary key (id))
 ;
 

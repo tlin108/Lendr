@@ -9,7 +9,8 @@ scalaVersion := "2.11.6"
 libraryDependencies ++= Seq(
   javaJdbc,
   cache,
-  javaWs
+  javaWs,
+  "org.mindrot" % "jbcrypt" % "0.3m"
 )
 
 // Play provides two styles of routers, one expects its actions to be injected, the

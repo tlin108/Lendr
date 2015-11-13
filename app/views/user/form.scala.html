@@ -10,49 +10,49 @@
             <p>A Community tool sharing project</p>
 
             <div class="container ">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" action="@routes.User.create()" method="post">
                 <h2>Registration Form</h2>
                 <br>
                 <div class="form-group">
                     <label for="userName" class="col-sm-4 control-label">User Name</label>
                     <div class="col-sm-4">
-                        <input type="text" id="userName" placeholder="User Name" class="form-control" autofocus>
+                        <input type="text" id="userName" name="userName" placeholder="User Name" class="form-control" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-4 control-label">Password</label>
                     <div class="col-sm-4">
-                        <input type="password" id="password" placeholder="Password" class="form-control">
+                        <input type="password" id="password" name="password" placeholder="Password" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="firstName" class="col-sm-4 control-label">First Name</label>
                     <div class="col-sm-4">
-                        <input type="text" id="firstName" placeholder="First Name" class="form-control" autofocus>
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name" class="form-control" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="lastName" class="col-sm-4 control-label">Last Name</label>
                     <div class="col-sm-4">
-                        <input type="text" id="lastName" placeholder="Last Name" class="form-control" autofocus>
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" class="form-control" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email" class="col-sm-4 control-label">Email</label>
                     <div class="col-sm-4">
-                        <input type="email" id="email" placeholder="Email" class="form-control">
+                        <input type="email" id="email" name="email" placeholder="Email" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="address" class="col-sm-4 control-label">Address</label>
                     <div class="col-sm-4">
-                        <input type="text" id="address" placeholder="Address" class="form-control">
+                        <input type="text" id="address" name="address" placeholder="Address" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber" class="col-sm-4 control-label">Phone Number</label>
                     <div class="col-sm-4">
-                        <input type="tel" id="phoneNum" placeholder="Phone Number" class="form-control">
+                        <input type="tel" id="phoneNum" name="phoneNum" placeholder="Phone Number" class="form-control">
                     </div>
                 </div>
             </form> <!-- /form -->
