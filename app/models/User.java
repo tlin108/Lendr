@@ -10,35 +10,38 @@ import javax.persistence.Id;
 import javax.validation.Constraint;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import java.util.List;
 
 
 @Table(name="users")
 @Entity
 public class User extends Model {
   @Id
-  public String id;
+  public Long id;
 
   @Constraints.Required
   @Column(unique=true)
   public String userName;
 
-  @Constraints.Required
+
   public String password_hash;
 
-  @Constraints.Required
+
   public String firstName;
 
-  @Constraints.Required
+
   public String lastName;
 
-  @Constraints.Required
+
   public String address;
 
-  @Constraints.Required
+
   public String phoneNum;
 
-  @Constraints.Required
+
   public String email;
+
+  public List<User> userList;
 
   // A finder object for easier querying
   public static Finder<Long, User> find = new Finder<Long, User>(User.class);
@@ -47,9 +50,6 @@ public class User extends Model {
     return userName;
   }
 
-  public String getID(){
-    return id;
-  }
 
   // NOT FOR PRODUCTION - must ensure this is a valid user first. I have not done that.
   public boolean authenticate(String password) {
@@ -70,5 +70,6 @@ public class User extends Model {
 
     return user;
     }
+
 
 }
