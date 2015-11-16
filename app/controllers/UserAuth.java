@@ -57,14 +57,17 @@ public class UserAuth extends Controller {
 
     // Route: GET /users/:id
     //  Shows the User profile 'id'
+    //  There's an issue here... why is 'new' in user/new NOT taken as an id but 'login' in user/login IS taken as id
     public Result show(String id) {
         return ok("This is the user/:id page for user profile of id: " + String.valueOf(id) + "\n");
     }
 
-    public Result loginForm() {
-        return ok(views.html.user.loginform.render());
-    }
+    //Route: GET /user/login/form
+    //Display the form for user login form
+    public Result loginForm() { return ok(views.html.user.loginform.render()); }
 
+    //Route: POST /user/login
+    //Login user
     public Result login() {
         DynamicForm userForm = Form.form().bindFromRequest();
         String username = userForm.data().get("username");
@@ -78,7 +81,7 @@ public class UserAuth extends Controller {
         } else {
             flash("error", "Invalid login. Check your username and password.");
         }
-
+        //need to implement redirect page after login is confirmed
         return ok();
     }
 }
