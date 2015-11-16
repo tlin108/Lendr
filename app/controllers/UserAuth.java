@@ -1,10 +1,11 @@
 package controllers;
 
+import models.User;
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.*;
-import models.User;
+
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class UserAuth extends Controller {
     //  Creates a User account from user request input.
     public Result create() {
         DynamicForm userForm = Form.form().bindFromRequest();
-        String username = userForm.data().get("userName");
+        String username = userForm.data().get("username");
         String password = userForm.data().get("password");
 
         User user = User.createNewUser(username, password);
@@ -38,27 +39,27 @@ public class UserAuth extends Controller {
 
         user.save();
 
-        flash("success", "Welcome new user " + user.getUserName());
-        session("user_id", user.getID().toString());
-        return redirect(routes.UserAuth.show(user.getID()));
+        flash("success", "Welcome new user " + user.userName);
+        session("user_id", user.id.toString());
+        return redirect(routes.Application.newUser());
     }
 
     // Route: DELETE /user/:id
     //  Delete a User account from data base.
-    public Result delete(String id) {
+    public Result delete(Long id) {
         return ok();
     }
 
     // Route: PUT   /user/:id
     //  Update a User account by using it's registered form.
-    public Result update(String id) {
+    public Result update(Long id) {
         return ok();
     }
 
     // Route: GET /users/:id
     //  Shows the User profile 'id'
     //  There's an issue here... why is 'new' in user/new NOT taken as an 'id' but 'login' in user/login IS taken as 'id'
-    public Result show(String id) {
+    public Result show(Long id) {
         return ok("This is the user/:id page for user profile of id: " + String.valueOf(id) + "\n");
     }
 

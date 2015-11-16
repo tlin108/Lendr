@@ -13,7 +13,7 @@ create table tool (
 ;
 
 create table users (
-  id                        varchar(255) not null,
+  id                        bigserial not null,
   user_name                 varchar(255),
   password_hash             varchar(255),
   first_name                varchar(255),
