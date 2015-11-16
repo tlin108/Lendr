@@ -13,6 +13,8 @@ POST    /user                      controllers.UserAuth.create()
 DELETE  /user/:id                  controllers.UserAuth.delete(id: String)
 PUT     /user/:id                  controllers.UserAuth.update(id: String)
 GET     /user/:id                  controllers.UserAuth.show(id: String)
+GET     /user/loginform            controllers.UserAuth.loginForm()
+POST    /user/login                controllers.UserAuth.login()
 
 GET     /tool                      controllers.Tool.index()
 GET     /tool/new                  controllers.Tool.form()

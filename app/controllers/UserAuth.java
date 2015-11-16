@@ -60,4 +60,25 @@ public class UserAuth extends Controller {
     public Result show(String id) {
         return ok("This is the user/:id page for user profile of id: " + String.valueOf(id) + "\n");
     }
+
+    public Result loginForm() {
+        return ok(views.html.user.loginform.render());
+    }
+
+    public Result login() {
+        DynamicForm userForm = Form.form().bindFromRequest();
+        String username = userForm.data().get("username");
+        String password = userForm.data().get("password");
+
+        User user = User.find.where().eq("username", username).findUnique();
+
+        if(user != null && user.authenticate(password)) {
+            session("user_id", user.id.toString());
+            flash("success", "Welcome back " + user.userName);
+        } else {
+            flash("error", "Invalid login. Check your username and password.");
+        }
+
+        return ok();
+    }
 }

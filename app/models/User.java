@@ -16,31 +16,32 @@ import javax.persistence.Column;
 @Entity
 public class User extends Model {
   @Id
-  private String id;
+  public String id;
 
   @Constraints.Required
   @Column(unique=true)
-  private String userName;
+  public String userName;
 
   @Constraints.Required
-  private String password_hash;
+  public String password_hash;
 
   @Constraints.Required
-  private String firstName;
+  public String firstName;
 
   @Constraints.Required
-  private String lastName;
+  public String lastName;
 
   @Constraints.Required
-  private String address;
+  public String address;
 
   @Constraints.Required
-  private String phoneNum;
+  public String phoneNum;
 
-  private String email;
+  @Constraints.Required
+  public String email;
 
   // A finder object for easier querying
-  private static Finder<Long, User> find = new Finder<Long, User>(User.class);
+  public static Finder<Long, User> find = new Finder<Long, User>(User.class);
 
   public String getUserName(){
     return userName;

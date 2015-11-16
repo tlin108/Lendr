@@ -1,0 +1,28 @@
+@* This template does not have parameters *@
+
+@main("Welcome new user") {
+
+<header>
+    <div class="container">
+        <h1>Login Page</h1>
+        <br>
+        <p>Hello There</p>
+
+        <div class="container ">
+            <form class="form-horizontal" role="form" action="@routes.UserAuth.login()" method="post">
+                <h2>Registration Form</h2>
+                <br>
+                <div class="form-group">
+                    <label for="userName" class="col-sm-4 control-label">User Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="userName" name="userName" placeholder="User Name" class="form-control" autofocus>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</header>
+}
+
+
+
