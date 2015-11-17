@@ -9,13 +9,13 @@ GET     /user/welcome               controllers.Application.newUser()
 # RESTful Routes
 # We allow some CRUD operations on Resources
 
-GET     /user/new                  controllers.UserAuth.form()
-POST    /user                      controllers.UserAuth.create()
-DELETE  /user/:id                  controllers.UserAuth.delete(id: Long)
-PUT     /user/:id                  controllers.UserAuth.update(id: Long)
-GET     /user/:id                  controllers.UserAuth.show(id: Long)
-GET     /user/login/form           controllers.UserLogin.loginForm()
-POST    /user/login                controllers.UserLogin.login()
+GET     /user/new                  controllers.UserActivity.createForm()
+POST    /user                      controllers.UserActivity.create()
+DELETE  /user/:id                  controllers.UserActivity.delete(id: Long)
+PUT     /user/:id                  controllers.UserActivity.update(id: Long)
+GET     /user/:id                  controllers.UserActivity.show(id: Long)
+GET     /user/login/form           controllers.UserActivity.loginForm()
+POST    /user/login                controllers.UserActivity.login()
 
 
 GET     /tool                      controllers.Tool.index()

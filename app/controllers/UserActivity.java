@@ -15,12 +15,37 @@ import static play.data.Form.form;
  * This is the User Controller. This is where we implement all of the Action
  * methods related to operations on my User.
  */
-public class UserAuth extends Controller {
+public class UserActivity extends Controller {
 
     // Route: GET /user/new
     //  Displays the form for creating a new user account.
-    public Result form() {
-        return ok(views.html.user.form.render());
+    public Result createForm() {
+        return ok(views.html.user.createform.render());
+    }
+
+    // Route: GET /user/login/form
+    //  Display the form for user login form
+    public Result loginForm() { 
+    	return ok(views.html.user.loginform.render());
+    }
+
+    // Route: POST /user/login
+    //  Login registered user
+    public Result login() {
+        DynamicForm userForm = Form.form().bindFromRequest();
+        String username = userForm.data().get("userName");
+        String password = userForm.data().get("password");
+
+        User user = User.find.where().eq("userName", username).findUnique();
+
+        if(user != null && user.authenticate(password)) {
+            session("user_id", user.id.toString());
+            flash("success", "Welcome back " + user.userName);
+        } else {
+            flash("error", "Invalid login. Check your username and password.");
+        }
+        
+        return redirect(routes.UserActivity.show(user.id));
     }
 
     // Route: POST /user
@@ -41,7 +66,7 @@ public class UserAuth extends Controller {
 
         flash("success", "Welcome new user " + user.userName);
         session("user_id", user.id.toString());
-        return redirect(routes.Application.newUser());
+        return redirect(routes.UserActivity.show(user.id));
     }
 
     // Route: DELETE /user/:id
