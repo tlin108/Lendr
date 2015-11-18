@@ -88,8 +88,7 @@ public class UserActivity extends Controller {
     //  Shows the User profile 'id'
     //  There's an issue here... why is 'new' in user/new NOT taken as an 'id' but 'login' in user/login IS taken as 'id'
     public Result show(Long id) {
-        return ok("This is the user/:id page for user profile of id: " + String.valueOf(id) + "\n");
+        return ok(views.html.user.index.render(String.valueOf(id)));
     }
-
 
 }
