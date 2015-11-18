@@ -39,13 +39,20 @@ public class UserActivity extends Controller {
         User user = User.find.where().eq("userName", username).findUnique();
 
         if(user != null && user.authenticate(password)) {
-            session("user_id", user.id.toString());
-            flash("success", "Welcome back " + user.userName);
+            session("user_id", user.getId().toString());
+            flash("success", "Welcome back " + user.getUserName());
+            return redirect(routes.UserActivity.profile(user.getId()));
+            //return redirect(routes.Application.profile());
+
+
         } else {
             flash("error", "Invalid login. Check your username and password.");
+            return redirect(routes.UserActivity.loginForm());
         }
-        
-        return redirect(routes.UserActivity.show(user.id));
+    }
+
+    public Result profile(Long id) {
+        return ok("Success! You've logged in. Profile Id: " + String.valueOf(id));
     }
 
     // Route: POST /user
@@ -56,20 +63,28 @@ public class UserActivity extends Controller {
         String password = userForm.data().get("password");
         String firstname = userForm.data().get("firstName");
         String lastname = userForm.data().get("lastName");
+        String email = userForm.data().get("email");
+        String address = userForm.data().get("address");
         String phonenum = userForm.data().get("phoneNum");
 
-        User user = User.createNewUser(username, password, firstname, lastname, phonenum);
+        User user = User.createNewUser(username, password, firstname, lastname, email, address, phonenum);
 
         if(user == null) {
-            flash("error", "Invalid user, please enter all required informations");
+            flash("error", "Invalid user, please enter all valid informations");
             return redirect(routes.UserActivity.createForm());
         }
 
         user.save();
 
-        flash("success", "Welcome new user " + user.userName);
-        session("user_id", user.id.toString());
-        return redirect(routes.UserActivity.show(user.id));
+        flash("success", "Welcome new user " + user.getUserName());
+        session("user_id", user.getId().toString());
+        return redirect(routes.UserActivity.show(user.getId()));
+    }
+
+    // Route: GET /users/:id
+    //  Shows the User profile 'id' after registering
+    public Result show(Long id) {
+        return ok("This is the user/:id page for user profile of id: " + String.valueOf(id) + "\n");
     }
 
     // Route: DELETE /user/:id
@@ -82,13 +97,6 @@ public class UserActivity extends Controller {
     //  Update a User account by using it's registered form.
     public Result update(Long id) {
         return ok();
-    }
-
-    // Route: GET /users/:id
-    //  Shows the User profile 'id'
-    //  There's an issue here... why is 'new' in user/new NOT taken as an 'id' but 'login' in user/login IS taken as 'id'
-    public Result show(Long id) {
-        return ok(views.html.user.index.render(String.valueOf(id)));
     }
 
 }
