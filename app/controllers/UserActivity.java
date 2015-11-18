@@ -41,7 +41,7 @@ public class UserActivity extends Controller {
         if(user != null && user.authenticate(password)) {
             session("user_id", user.getId().toString());
             flash("success", "Welcome back " + user.getUserName());
-            return redirect(routes.UserActivity.profile());
+            return redirect(routes.UserActivity.());
 
 
         } else {
