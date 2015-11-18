@@ -1,16 +1,17 @@
 body { 
-	padding-top: 70px;
-	overflow-x:hidden;
-	font-family:"Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
-	background-image:url(../images/bg2.jpg);
-	background-repeat:none;
-	background-attachment:scroll;
-	background-position:center center;
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	background-size:cover;
-	-o-background-size:cover;
-	text-align:center;
+    background-color: black;
+    overflow-x:hidden;
+    overflow-y:auto;
+    font-family:"Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-image:url(../images/bg2.jpg);
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center center;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    background-size:cover;
+    -o-background-size:cover;
+    text-align:center;
 }
 
 .darken {
