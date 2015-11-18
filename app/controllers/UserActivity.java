@@ -41,8 +41,12 @@ public class UserActivity extends Controller {
         if(user != null && user.authenticate(password)) {
             session("user_id", user.getId().toString());
             flash("success", "Welcome back " + user.getUserName());
+            return redirect(routes.UserActivity.profile());
+
+
         } else {
             flash("error", "Invalid login. Check your username and password.");
+            return redirect(routes.UserActivity.loginForm());
         }
         
         return redirect(routes.UserActivity.show(user.getId()));
@@ -90,6 +94,10 @@ public class UserActivity extends Controller {
     //  Update a User account by using it's registered form.
     public Result update(Long id) {
         return ok();
+    }
+
+    public Result profile() {
+        return ok("Success! You've logged in.");
     }
 
 
