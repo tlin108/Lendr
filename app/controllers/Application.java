@@ -14,5 +14,6 @@ public class Application extends Controller {
     public Result newUser() {
         return ok(views.html.user.newuser.render());
     }
- //   public Result profile() {return ok(views.html.user.profile.render());}
+
+    public Result profile() { return ok(views.html.user.profile.render());}
 }
