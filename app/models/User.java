@@ -17,47 +17,57 @@ import java.util.List;
 @Entity
 public class User extends Model {
   @Id
-  public Long id;
+  private Long id;
 
   @Constraints.Required
   @Column(unique=true)
-  public String userName;
-
-
-  public String password_hash;
+  private String userName;
 
   @Constraints.Required
-  public String firstName;
+  private String password_hash;
 
   @Constraints.Required
-  public String lastName;
-
-
-  public String address;
+  private String firstName;
 
   @Constraints.Required
-  public String phoneNum;
+  private String lastName;
 
+  @Constraints.Required
+  private String address;
 
-  public String email;
+  @Constraints.Required
+  private String phoneNum;
 
-  public List<User> userList;
+  @Constraints.Required
+  private String email;
+
+  //public List<User> userList;
 
   // A finder object for easier querying
   public static Finder<Long, User> find = new Finder<Long, User>(User.class);
 
+  //Get methods
+  public Long getId() { return id; }
   public String getUserName(){
     return userName;
   }
-
+  public String getPassword_hash() { return password_hash; }
+  public String getFirstName() { return firstName; }
+  public String getLastName() {return lastName; }
+  public String getAddress() { return address; }
+  public String getPhoneNum() { return phoneNum; }
+  public String getEmail() { return email; }
 
   // NOT FOR PRODUCTION - must ensure this is a valid user first. I have not done that.
   public boolean authenticate(String password) {
       return BCrypt.checkpw(password, this.password_hash);
   }
 
-  public static User createNewUser(String userName, String password, String firstname, String lastname, String phonenum) {
-  	if(password == null || userName == null || firstname == null || lastname == null || phonenum == null || userName.length() < 4 || password.length() < 8 || firstname.length() == 0 || lastname.length() == 0 || phonenum.length() == 0) {
+
+  public static User createNewUser(String userName, String password, String firstname, String lastname, String email, String address, String phonenum) {
+  	if(password == null || userName == null || firstname == null || lastname == null || phonenum == null ||
+            userName.length() < 4 || password.length() < 8 || firstname.length() == 0 || firstname.length() < 2 ||
+            lastname.length() == 0 || lastname.length() < 2 || phonenum.length() == 0 || phonenum.length() < 10) {
    		return null;
     }
 
