@@ -100,7 +100,4 @@ public class UserActivity extends Controller {
     }
 
 
-
-
-
 }
