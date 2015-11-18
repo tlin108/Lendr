@@ -41,7 +41,7 @@ public class UserActivity extends Controller {
         if(user != null && user.authenticate(password)) {
             session("user_id", user.getId().toString());
             flash("success", "Welcome back " + user.getUserName());
-            return redirect(routes.UserActivity.());
+            return redirect(routes.UserActivity.profile());
 
 
         } else {
@@ -50,6 +50,10 @@ public class UserActivity extends Controller {
         }
         
         return redirect(routes.UserActivity.show(user.getId()));
+    }
+    
+    public Result profile() {
+        return ok("Success! You've logged in.");
     }
 
     // Route: POST /user
@@ -96,9 +100,6 @@ public class UserActivity extends Controller {
         return ok();
     }
 
-    public Result profile() {
-        return ok("Success! You've logged in.");
-    }
 
 
 
