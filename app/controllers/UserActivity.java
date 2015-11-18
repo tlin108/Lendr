@@ -61,7 +61,7 @@ public class UserActivity extends Controller {
         User user = User.createNewUser(username, password, firstname, lastname, phonenum);
 
         if(user == null) {
-            flash("error", "Invalid user");
+            flash("error", "Invalid user, please enter all required informations");
             return redirect(routes.UserActivity.createForm());
         }
 

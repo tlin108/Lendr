@@ -13,6 +13,13 @@
             <form class="form-horizontal" role="form" action="@routes.UserActivity.create()" method="post">
                 <h2>Registration Form</h2>
                 <p>Fields marked with * are required</p>
+                @* Display flash messages *@
+                @if(flash.containsKey("error")) {
+                    <div style="color:red">
+                        <p>Error Flash Message:</p>
+                        @flash.get("error")
+                    </div>
+                }
                 <br>
                 <div class="form-group">
                     <label for="userName" class="col-sm-4 control-label">User Name*</label>
