@@ -12,27 +12,30 @@
             <div class="container ">
             <form class="form-horizontal" role="form" action="@routes.UserActivity.create()" method="post">
                 <h2>Registration Form</h2>
+                <p>Fields marked with * are required</p>
                 <br>
                 <div class="form-group">
-                    <label for="userName" class="col-sm-4 control-label">User Name</label>
+                    <label for="userName" class="col-sm-4 control-label">User Name*</label>
                     <div class="col-sm-4">
-                        <input type="text" id="username" name="username" placeholder="User Name" class="form-control" autofocus>
+                        <input type="text" id="username" name="userName" placeholder="User Name" class="form-control" autofocus>
+                        <span class="help-block">Minimum 4 characters</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="col-sm-4 control-label">Password</label>
+                    <label for="password" class="col-sm-4 control-label">Password*</label>
                     <div class="col-sm-4">
                         <input type="password" id="password" name="password" placeholder="Password" class="form-control">
+                        <span class="help-block">Minimum 8 characters</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="firstName" class="col-sm-4 control-label">First Name</label>
+                    <label for="firstName" class="col-sm-4 control-label">First Name*</label>
                     <div class="col-sm-4">
                         <input type="text" id="firstName" name="firstName" placeholder="First Name" class="form-control" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="lastName" class="col-sm-4 control-label">Last Name</label>
+                    <label for="lastName" class="col-sm-4 control-label">Last Name*</label>
                     <div class="col-sm-4">
                         <input type="text" id="lastName" name="lastName" placeholder="Last Name" class="form-control" autofocus>
                     </div>
@@ -50,7 +53,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="phoneNumber" class="col-sm-4 control-label">Phone Number</label>
+                    <label for="phoneNumber" class="col-sm-4 control-label">Phone Number*</label>
                     <div class="col-sm-4">
                         <input type="tel" id="phoneNum" name="phoneNum" placeholder="Phone Number" class="form-control">
                     </div>

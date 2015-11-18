@@ -52,14 +52,17 @@ public class UserActivity extends Controller {
     //  Creates a User account from user request input.
     public Result create() {
         DynamicForm userForm = Form.form().bindFromRequest();
-        String username = userForm.data().get("username");
+        String username = userForm.data().get("userName");
         String password = userForm.data().get("password");
+        String firstname = userForm.data().get("firstName");
+        String lastname = userForm.data().get("lastName");
+        String phonenum = userForm.data().get("phoneNum");
 
-        User user = User.createNewUser(username, password);
+        User user = User.createNewUser(username, password, firstname, lastname, phonenum);
 
         if(user == null) {
             flash("error", "Invalid user");
-            return redirect(routes.Application.index());
+            return redirect(routes.UserActivity.createForm());
         }
 
         user.save();

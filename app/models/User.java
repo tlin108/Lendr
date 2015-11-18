@@ -26,16 +26,16 @@ public class User extends Model {
 
   public String password_hash;
 
-
+  @Constraints.Required
   public String firstName;
 
-
+  @Constraints.Required
   public String lastName;
 
 
   public String address;
 
-
+  @Constraints.Required
   public String phoneNum;
 
 
@@ -56,8 +56,8 @@ public class User extends Model {
       return BCrypt.checkpw(password, this.password_hash);
   }
 
-  public static User createNewUser(String userName, String password) {
-  	if(password == null || userName == null || userName.length() < 4 || password.length() < 8 ) {
+  public static User createNewUser(String userName, String password, String firstname, String lastname, String phonenum) {
+  	if(password == null || userName == null || firstname == null || lastname == null || phonenum == null || userName.length() < 4 || password.length() < 8 || firstname.length() == 0 || lastname.length() == 0 || phonenum.length() == 0) {
    		return null;
     }
 
@@ -67,6 +67,9 @@ public class User extends Model {
     User user = new User();
     user.userName = userName;
     user.password_hash = passwordHash;
+    user.firstName = firstname;
+    user.lastName = lastname;
+    user.phoneNum = phonenum;
 
     return user;
     }
