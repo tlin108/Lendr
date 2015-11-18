@@ -41,11 +41,18 @@ public class UserActivity extends Controller {
         if(user != null && user.authenticate(password)) {
             session("user_id", user.getId().toString());
             flash("success", "Welcome back " + user.getUserName());
+            return redirect(routes.UserActivity.profile(user.getId()));
+            //return redirect(routes.Application.profile());
+
+
         } else {
             flash("error", "Invalid login. Check your username and password.");
+            return redirect(routes.UserActivity.loginForm());
         }
-        
-        return redirect(routes.UserActivity.show(user.getId()));
+    }
+
+    public Result profile(Long id) {
+        return ok("Success! You've logged in. Profile Id: " + String.valueOf(id));
     }
 
     // Route: POST /user
@@ -91,6 +98,7 @@ public class UserActivity extends Controller {
     public Result update(Long id) {
         return ok();
     }
+
 
 
 

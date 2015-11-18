@@ -5,10 +5,12 @@
 # Home page
 GET     /                           controllers.Application.index()
 GET     /user/welcome               controllers.Application.newUser()
+GET     /user/profile               controllers.Application.profile()
 
 # RESTful Routes
 # We allow some CRUD operations on Resources
 
+#UserAcitvity
 GET     /user/new                  controllers.UserActivity.createForm()
 POST    /user                      controllers.UserActivity.create()
 DELETE  /user/:id                  controllers.UserActivity.delete(id: Long)
@@ -16,8 +18,11 @@ PUT     /user/:id                  controllers.UserActivity.update(id: Long)
 GET     /user/:id                  controllers.UserActivity.show(id: Long)
 GET     /user/login/form           controllers.UserActivity.loginForm()
 POST    /user/login                controllers.UserActivity.login()
+GET     /user/profile/:id          controllers.UserActivity.profile(id: Long)
 
 
+
+#Tool
 GET     /tool                      controllers.Tool.index()
 GET     /tool/new                  controllers.Tool.form()
 GET     /tool/:id                  controllers.Tool.show(id: Long)
