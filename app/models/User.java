@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.validation.Constraint;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 
@@ -41,7 +42,8 @@ public class User extends Model {
 
   public String email;
 
-  public List<User> userList;
+  @OneToMany
+  public List<Tool> toolList;
 
   // A finder object for easier querying
   public static Finder<Long, User> find = new Finder<Long, User>(User.class);

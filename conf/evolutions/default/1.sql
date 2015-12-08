@@ -8,7 +8,7 @@ create table tool (
   name                      varchar(255),
   description               varchar(255),
   available                 boolean,
-  owner_id                  bigint,
+  user_id                   bigint,
   toolcategory_id           bigint,
   constraint pk_tool primary key (id))
 ;
@@ -32,8 +32,8 @@ create table users (
   constraint pk_users primary key (id))
 ;
 
-alter table tool add constraint fk_tool_owner_1 foreign key (owner_id) references users (id);
-create index ix_tool_owner_1 on tool (owner_id);
+alter table tool add constraint fk_tool_owner_1 foreign key (user_id) references users (id);
+create index ix_tool_owner_1 on tool (user_id);
 alter table tool add constraint fk_tool_toolcategory_2 foreign key (toolcategory_id) references tool_category (id);
 create index ix_tool_toolcategory_2 on tool (toolcategory_id);
 

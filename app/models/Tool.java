@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 @Entity
 public class Tool extends Model {
@@ -17,6 +18,7 @@ public class Tool extends Model {
   public boolean available;
   
   @ManyToOne
+  @JoinColumn(name = "user_id")
   public User owner;
 
   @ManyToOne

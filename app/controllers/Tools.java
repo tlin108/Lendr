@@ -22,10 +22,9 @@ public class Tools extends Controller {
     // Route: GET /tool
     public Result index() {
         // Need to find a way to filter the list of tool by ownerId
-        //Long ownerId = Long.parseLong(session().get("user_id"));
-
-        //for now I'll just put all tools
-        List<Tool> tools = Tool.find.all();
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        User owner = User.find.byId(ownerId);
+        List<Tool> tools = owner.toolList;
 
         return ok(views.html.tool.index.render(tools));
     }
