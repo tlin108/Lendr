@@ -4,12 +4,18 @@
 # --- !Ups
 
 create table tool (
-  id                        varchar(255) not null,
+  id                        bigserial not null,
   name                      varchar(255),
   description               varchar(255),
-  owner                     varchar(255),
-  borrower                  varchar(255),
+  owner_id                  bigint,
+  toolcategory_id           bigint,
   constraint pk_tool primary key (id))
+;
+
+create table tool_category (
+  id                        bigserial not null,
+  name                      varchar(255),
+  constraint pk_tool_category primary key (id))
 ;
 
 create table users (
@@ -25,12 +31,18 @@ create table users (
   constraint pk_users primary key (id))
 ;
 
+alter table tool add constraint fk_tool_owner_1 foreign key (owner_id) references users (id);
+create index ix_tool_owner_1 on tool (owner_id);
+alter table tool add constraint fk_tool_toolcategory_2 foreign key (toolcategory_id) references tool_category (id);
+create index ix_tool_toolcategory_2 on tool (toolcategory_id);
 
 
 
 # --- !Downs
 
 drop table if exists tool cascade;
+
+drop table if exists tool_category cascade;
 
 drop table if exists users cascade;
 

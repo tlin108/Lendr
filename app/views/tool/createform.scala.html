@@ -8,7 +8,7 @@
             <br>
 
             <div class="container ">
-            <form class="form-horizontal" role="form" action="@routes.Tool.create()" method="post">
+            <form class="form-horizontal" role="form" action="@routes.Tools.create()" method="post">
                 <h2>Tool Registration Form</h2>
                 <p>Fields marked with * are required</p>
                 @* Display flash messages *@
@@ -20,48 +20,18 @@
                 }
                 <br>
                 <div class="form-group">
-                    <label for="userName" class="col-sm-4 control-label">User Name*</label>
+                    <label for="name" class="col-sm-4 control-label">Tool Name*</label>
                     <div class="col-sm-4">
-                        <input type="text" id="username" name="userName" placeholder="User Name: Minimum 4 characters" class="form-control" autofocus>
+                        <input type="text" id="name" name="name" placeholder="Tool Name" class="form-control" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="col-sm-4 control-label">Password*</label>
+                    <label for="description" class="col-sm-4 control-label">Description*</label>
                     <div class="col-sm-4">
-                        <input type="password" id="password" name="password" placeholder="Password Minimum 8 characters" class="form-control">
+                        <textarea type="text" id="description"name="description" placeholder="Description" class="form-control" cols="30" rows="10"></textarea>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="firstName" class="col-sm-4 control-label">First Name*</label>
-                    <div class="col-sm-4">
-                        <input type="text" id="firstName" name="firstName" placeholder="First Name" class="form-control" autofocus>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="lastName" class="col-sm-4 control-label">Last Name*</label>
-                    <div class="col-sm-4">
-                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" class="form-control" autofocus>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="email" class="col-sm-4 control-label">Email</label>
-                    <div class="col-sm-4">
-                        <input type="email" id="email" name="email" placeholder="Email" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="address" class="col-sm-4 control-label">Address</label>
-                    <div class="col-sm-4">
-                        <input type="text" id="address" name="address" placeholder="Address" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber" class="col-sm-4 control-label">Phone Number*</label>
-                    <div class="col-sm-4">
-                        <input type="tel" id="phoneNum" name="phoneNum" placeholder="Phone Number" class="form-control">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-xl">Register</button>
+                <button type="submit" class="btn btn-xl">Register Tool</button>
             </form> <!-- /form -->
         </div> <!-- ./container -->
         </div>

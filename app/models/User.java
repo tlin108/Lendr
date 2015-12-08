@@ -50,8 +50,6 @@ public class User extends Model {
     return userName;
   }
 
-
-  // NOT FOR PRODUCTION - must ensure this is a valid user first. I have not done that.
   public boolean authenticate(String password) {
       return BCrypt.checkpw(password, this.password_hash);
   }
