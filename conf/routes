@@ -10,11 +10,13 @@ GET     /                           controllers.Application.index()
 
 GET     /user/new                  controllers.UserActivity.createForm()
 POST    /user                      controllers.UserActivity.create()
-DELETE  /user/:id                  controllers.UserActivity.delete(id: Long)
-PUT     /user/:id                  controllers.UserActivity.update(id: Long)
-GET     /user/:id                  controllers.UserActivity.show(id: Long)
+DELETE  /user/                  controllers.UserActivity.delete()
+PUT     /user/                  controllers.UserActivity.update()
+GET     /user/                  controllers.UserActivity.show()
 GET     /user/login/form           controllers.UserActivity.loginForm()
 POST    /user/login                controllers.UserActivity.login()
+GET		/user/logout			   controllers.UserActivity.logout()
+GET		/user/profile			   controllers.UserActivity.profile()
 
 
 GET     /tool                      controllers.Tools.index()

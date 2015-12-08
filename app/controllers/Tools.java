@@ -73,7 +73,7 @@ public class Tools extends Controller {
         tool.save();
 
         flash("success", "Added new tool"+tool.name);
-        return redirect(routes.UserActivity.show(ownerId));
+        return redirect(routes.UserActivity.show());
     }
 
 }

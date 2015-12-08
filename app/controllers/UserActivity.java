@@ -46,7 +46,7 @@ public class UserActivity extends Controller {
             flash("error", "Invalid login. Check your username and password.");
         }
         
-        return redirect(routes.UserActivity.show(user.id));
+        return redirect(routes.UserActivity.show());
     }
 
     // Route: POST /user
@@ -70,28 +70,32 @@ public class UserActivity extends Controller {
 
         flash("success", "Welcome new user " + user.userName);
         session("user_id", user.id.toString());
-        return redirect(routes.UserActivity.show(user.id));
+        return redirect(routes.UserActivity.show());
     }
 
     // Route: DELETE /user/:id
     //  Delete a User account from data base.
-    public Result delete(Long id) {
+    public Result delete() {
         return ok();
     }
 
     // Route: PUT   /user/:id
     //  Update a User account by using it's registered form.
-    public Result update(Long id) {
+    public Result update() {
         return ok();
     }
 
     // Route: GET /users/:id
     //  Shows the User profile 'id'
     //  There's an issue here... why is 'new' in user/new NOT taken as an 'id' but 'login' in user/login IS taken as 'id'
-    public Result show(Long id) {
+    public Result show() {
         List<Tool> tools = Tool.find.all();
 
         return ok(views.html.user.index.render(tools));
+    }
+
+    public Result profile() {
+        return ok(views.html.user.profile.render());
     }
 
     public Result logout() {
