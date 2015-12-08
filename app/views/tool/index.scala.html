@@ -25,6 +25,11 @@
                                 <h4><a href="/tool/@tool.id">@tool.name</a>
                                 </h4>
                                 <p>@tool.description</p>
+                                @if(tool.available){
+                                    <p>Hosting</p>
+                                } else {
+                                    <a class="btn btn-primary" href="/tool/lend/@tool.id">Lend</a>
+                                }
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">x reviews</p>
@@ -40,7 +45,7 @@
                     }
             }
             <div class="col-sm-4 col-lg-4 col-md-4">
-                <h4><a href="#">Want to add your own tools?</a></h4>
+                <h4><a href="#">Want to add more tools?</a></h4>
                 <p class="white">Click on the button below to add your own tool for others to borrow!</p>
                 <a class="btn btn-primary" target="_blank" href="@routes.Tools.createForm()">Add Tool</a>
             </div>

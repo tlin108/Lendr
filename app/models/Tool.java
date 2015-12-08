@@ -13,6 +13,8 @@ public class Tool extends Model {
   public String name;
   
   public String description;
+
+  public boolean available;
   
   @ManyToOne
   public User owner;
@@ -32,6 +34,7 @@ public class Tool extends Model {
     tool.name = toolName;
     tool.description = toolDescription;
     tool.owner = toolOwner;
+    tool.available = true;
 
     return tool;
   }

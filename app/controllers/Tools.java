@@ -32,7 +32,9 @@ public class Tools extends Controller {
 
     // Route: GET /tool/:id
     public Result show(Long id) {
-        return ok("This is the tool/show page for tool of id: " + String.valueOf(id) + "\n");
+        Tool tool = Tool.find.byId(id);
+
+        return ok(views.html.tool.item.render(tool));
     }
 
     // Route: DELETE /tool/:id
@@ -45,9 +47,22 @@ public class Tools extends Controller {
         return ok();
     }
 
-    // Route: PUT /tool/:id
-    public Result update(Long id) {
-       return ok();
+    // Route: GET /borrow/:id
+    public Result lend(Long id) {
+        Tool tool = Tool.find.byId(id);
+        tool.available = true;
+        tool.save();
+
+       return ok(views.html.tool.item.render(tool));
+    }
+
+    // Route: GET /borrow/:id
+    public Result borrow(Long id) {
+        Tool tool = Tool.find.byId(id);
+        tool.available = false;
+        tool.save();
+
+       return ok(views.html.tool.item.render(tool));
     }
 
     // Route: GET /tool/new
