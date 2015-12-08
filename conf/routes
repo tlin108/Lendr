@@ -19,7 +19,7 @@ POST    /user/login                controllers.UserActivity.login()
 
 
 GET     /tool                      controllers.Tool.index()
-GET     /tool/new                  controllers.Tool.form()
+GET     /tool/new                  controllers.Tool.createForm()
 GET     /tool/:id                  controllers.Tool.show(id: Long)
 DELETE  /tool/:id                  controllers.Tool.delete(id: Long)
 PUT     /tool/:id                  controllers.Tool.update(id: Long)

@@ -39,6 +39,10 @@ public class Tool extends Controller {
     }
 
     // Route: POST /tool
+    public Result createForm() {
+        return ok(views.html.tool.createform.render());
+    }
+
     public Result create() {
         return ok();
     }
