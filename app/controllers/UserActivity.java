@@ -42,7 +42,7 @@ public class UserActivity extends Controller {
         if(user != null && user.authenticate(password)) {
             session("user_id", user.getId().toString());
             flash("success", "Welcome back " + user.getUserName());
-            return redirect(routes.UserActivity.profile(user.getId()));
+            return redirect(routes.UserActivity.show(user.getId()));
             //return redirect(routes.Application.profile());
 
 
@@ -80,12 +80,6 @@ public class UserActivity extends Controller {
         flash("success", "Welcome new user " + user.getUserName());
         session("user_id", user.getId().toString());
         return redirect(routes.UserActivity.show(user.getId()));
-    }
-
-    // Route: GET /users/:id
-    //  Shows the User profile 'id' after registering
-    public Result show(Long id) {
-        return ok("This is the user/:id page for user profile of id: " + String.valueOf(id) + "\n");
     }
 
     // Route: DELETE /user/:id
