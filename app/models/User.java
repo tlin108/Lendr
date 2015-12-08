@@ -51,6 +51,7 @@ public class User extends Model {
   public String getUserName(){
     return userName;
   }
+
   public String getPassword_hash() { return password_hash; }
   public String getFirstName() { return firstName; }
   public String getLastName() {return lastName; }
@@ -59,6 +60,7 @@ public class User extends Model {
   public String getEmail() { return email; }
 
   // NOT FOR PRODUCTION - must ensure this is a valid user first. I have not done that.
+
   public boolean authenticate(String password) {
       return BCrypt.checkpw(password, this.password_hash);
   }

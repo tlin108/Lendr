@@ -1,6 +1,7 @@
 package controllers;
 
 import models.User;
+import models.Tool;
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -97,6 +98,20 @@ public class UserActivity extends Controller {
     //  Update a User account by using it's registered form.
     public Result update(Long id) {
         return ok();
+    }
+
+    // Route: GET /users/:id
+    //  Shows the User profile 'id'
+    //  There's an issue here... why is 'new' in user/new NOT taken as an 'id' but 'login' in user/login IS taken as 'id'
+    public Result show(Long id) {
+        List<Tool> tools = Tool.find.all();
+
+        return ok(views.html.user.index.render(tools));
+    }
+
+    public Result logout() {
+        session().remove("user_id");
+        return redirect(routes.Application.index());
     }
 
 }
