@@ -48,7 +48,7 @@ public class UserActivity extends Controller {
         } else if(admin != null && admin.authenticate(password)) {
             session("admin_id", admin.id.toString());
             flash ("success", "Welcome admin " + admin.userName);
-   
+
         } else {
             flash("error", "Invalid login. Check your username and password.");
         }
