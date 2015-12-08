@@ -3,6 +3,14 @@
 
 # --- !Ups
 
+create table administrators (
+  id                        bigserial not null,
+  user_name                 varchar(255),
+  password_hash             varchar(255),
+  constraint uq_administrators_user_name unique (user_name),
+  constraint pk_administrators primary key (id))
+;
+
 create table tool (
   id                        bigserial not null,
   name                      varchar(255),
@@ -39,6 +47,8 @@ create index ix_tool_toolcategory_2 on tool (toolcategory_id);
 
 
 # --- !Downs
+
+drop table if exists administrators cascade;
 
 drop table if exists tool cascade;
 
