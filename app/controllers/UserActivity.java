@@ -25,7 +25,7 @@ public class UserActivity extends Controller {
 
     // Route: GET /user/login/form
     //  Display the form for user login form
-    public Result loginForm() { 
+    public Result loginForm() {
     	return ok(views.html.user.loginform.render());
     }
 
