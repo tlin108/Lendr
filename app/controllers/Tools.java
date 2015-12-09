@@ -21,6 +21,7 @@ import static play.data.Form.form;
 public class Tools extends Controller {
 
     // Route: GET /tool
+    @Security.Authenticated(UserAuth.class)
     public Result index() {
         // Need to find a way to filter the list of tool by ownerId
         Long ownerId = Long.parseLong(session().get("user_id"));
@@ -31,6 +32,7 @@ public class Tools extends Controller {
     }
 
     // Route: GET /tool/:id
+    @Security.Authenticated(UserAuth.class)
     public Result show(Long id) {
         Long ownerId = Long.parseLong(session().get("user_id"));
         User owner = User.find.byId(ownerId);
@@ -41,6 +43,7 @@ public class Tools extends Controller {
     }
 
     // Route: DELETE /tool/:id
+    @Security.Authenticated(UserAuth.class)
     public Result delete(Long id) {
         Tool tool = Tool.find.byId(id);
         tool.delete();
@@ -58,6 +61,7 @@ public class Tools extends Controller {
     }
 
     // Route: GET /borrow/:id
+    @Security.Authenticated(UserAuth.class)
     public Result lend(Long id) {
         Long ownerId = Long.parseLong(session().get("user_id"));
         User owner = User.find.byId(ownerId);
@@ -70,6 +74,7 @@ public class Tools extends Controller {
     }
 
     // Route: GET /borrow/:id
+    @Security.Authenticated(UserAuth.class)
     public Result borrow(Long id) {
         Long ownerId = Long.parseLong(session().get("user_id"));
         User owner = User.find.byId(ownerId);
@@ -82,12 +87,13 @@ public class Tools extends Controller {
     }
 
     // Route: GET /tool/new
+    @Security.Authenticated(UserAuth.class)
     public Result createForm() {
-
         return ok(views.html.tool.createform.render());
     }
 
     // Route: POST /tool
+    @Security.Authenticated(UserAuth.class)
     public Result create() {
         DynamicForm toolForm = Form.form().bindFromRequest();
         String name = toolForm.data().get("name");

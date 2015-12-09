@@ -96,18 +96,21 @@ public class UserActivity extends Controller {
 
     // Route: DELETE /user/:id
     //  Delete a User account from data base.
+    //@Security.Authenticated(UserAuth.class)
     public Result delete() {
         return ok();
     }
 
     // Route: PUT   /user/:id
     //  Update a User account by using it's registered form.
+    //@Security.Authenticated(UserAuth.class)
     public Result update() {
         return ok();
     }
 
     // Route: GET /users/:id
     //  Shows the User profile 'id'
+    @Security.Authenticated(UserAuth.class)
     public Result show() {
         List<Tool> tools = Tool.find.all();
         return ok(views.html.user.index.render(tools));
@@ -118,6 +121,9 @@ public class UserActivity extends Controller {
         return ok(views.html.user.admin.render());
     }
 
+    //Roure: GET/profile
+    //Shows user profile
+    @Security.Authenticated(UserAuth.class)
     public Result profile() {
         Long userId = Long.parseLong(session().get("user_id"));
         User user = User.find.byId(userId);
