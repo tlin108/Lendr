@@ -54,7 +54,7 @@ public class UserActivity extends Controller {
             return redirect(routes.UserActivity.loginForm());
         }
 
-        return ok();
+        return redirect(routes.UserActivity.show());
     }
 
     // Route: POST /user
@@ -109,7 +109,10 @@ public class UserActivity extends Controller {
 
 
     public Result profile() {
-        return ok(views.html.user.profile.render());
+        Long userId = Long.parseLong(session().get("user_id"));
+        User user = User.find.byId(userId);
+
+        return ok(views.html.user.profile.render(user));
     }
 
     public Result logout() {

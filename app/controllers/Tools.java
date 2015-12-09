@@ -76,6 +76,7 @@ public class Tools extends Controller {
 
     // Route: GET /tool/new
     public Result createForm() {
+
         return ok(views.html.tool.createform.render());
     }
 

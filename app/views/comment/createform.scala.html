@@ -22,15 +22,8 @@
                         <p>Owner: @tool.owner.getUserName()</p>
                     </div>
                     <div class="ratings">
-                        <p class="pull-right">3 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            4.0 stars
-                        </p>
+                        <p class="pull-right">@tool.commentList.size() reviews</p>
+                        <br><br>
                     </div>
                 </div>
                 <form action="@routes.Comments.create(tool.id)" method="post">

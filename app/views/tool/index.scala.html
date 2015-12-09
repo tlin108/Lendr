@@ -2,8 +2,6 @@
 
 @user.main("My Tools") {
 
-	 @user.header()
-
 	 <!-- Page Content -->
     <div class="container">
 
@@ -13,7 +11,7 @@
             @if(tools.isEmpty()){
                 <h2 class="white">No tools posted</h2>
              } else {
-                <h2 class="white">My Tool List</h2>
+                <h2 class="white">My Tools</h2>
                 <div class="col-md-9">
                 <div class="row">
                     @for(tool <- tools) {
@@ -32,13 +30,8 @@
                                 }
                             </div>
                             <div class="ratings">
-                                <p class="pull-right">x reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
+                                <p class="pull-right">@tool.commentList.size() comments</p>
+                                <br><br>
                             </div>
                         </div>
                     </div>
