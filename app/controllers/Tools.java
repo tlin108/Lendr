@@ -42,7 +42,14 @@ public class Tools extends Controller {
 
     // Route: DELETE /tool/:id
     public Result delete(Long id) {
-        return ok();
+        Tool tool = Tool.find.byId(id);
+        tool.delete();
+
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        User owner = User.find.byId(ownerId);
+        List<Tool> tools = owner.toolList;
+
+        return ok(views.html.tool.index.render(tools));
     }
 
     // Route: GET /tool/:id/edit

@@ -15,7 +15,9 @@
                     	}
                         @if((!tool.available) && tool.owner.getUserName() != curUser.getUserName()){
                     	<h4 class="pull-right">Not Available</h4>
-                    	}
+                    	} else {
+                        <a class="btn btn-primary pull-right" href="">Remove</a>
+                        }
                         <h4><a href="#">@tool.name</a>
                         <p>@tool.description</p>
                         <a class="btn btn-primary pull-right" href="#">Message</a>
