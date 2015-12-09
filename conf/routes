@@ -27,5 +27,8 @@ GET     /tool/borrow/:id           controllers.Tools.borrow(id: Long)
 GET		/tool/lend/:id 			   controllers.Tools.lend(id: Long)
 POST    /tool                      controllers.Tools.create()
 
+GET		/comment/new/:id		   controllers.Comments.createForm(id: Long)
+POST	/Comments 				   controllers.Comments.create(id: Long)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

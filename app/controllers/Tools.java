@@ -2,6 +2,7 @@ package controllers;
 
 import models.User;
 import models.Tool;
+import models.Comment;
 import play.mvc.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -31,9 +32,12 @@ public class Tools extends Controller {
 
     // Route: GET /tool/:id
     public Result show(Long id) {
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        User owner = User.find.byId(ownerId);
         Tool tool = Tool.find.byId(id);
+        List<Comment> comments = tool.commentList;
 
-        return ok(views.html.tool.item.render(tool));
+        return ok(views.html.tool.item.render(tool, owner, comments));
     }
 
     // Route: DELETE /tool/:id
@@ -48,20 +52,26 @@ public class Tools extends Controller {
 
     // Route: GET /borrow/:id
     public Result lend(Long id) {
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        User owner = User.find.byId(ownerId);
         Tool tool = Tool.find.byId(id);
         tool.available = true;
         tool.save();
+        List<Comment> comments = tool.commentList;
 
-       return ok(views.html.tool.item.render(tool));
+       return ok(views.html.tool.item.render(tool,owner,comments));
     }
 
     // Route: GET /borrow/:id
     public Result borrow(Long id) {
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        User owner = User.find.byId(ownerId);
         Tool tool = Tool.find.byId(id);
         tool.available = false;
         tool.save();
+        List<Comment> comments = tool.commentList;
 
-       return ok(views.html.tool.item.render(tool));
+       return ok(views.html.tool.item.render(tool,owner,comments));
     }
 
     // Route: GET /tool/new
