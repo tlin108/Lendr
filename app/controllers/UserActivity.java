@@ -117,6 +117,7 @@ public class UserActivity extends Controller {
     }
     //Route: GET /admin
     //Shows the admin homepage
+    @Security.Authenticated(UserAuth.class)
     public Result showAdmin() {
         return ok(views.html.user.admin.render());
     }
