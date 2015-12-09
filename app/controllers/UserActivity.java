@@ -34,27 +34,38 @@ public class UserActivity extends Controller {
     // Route: POST /user/login
     //  Login registered user
     public Result login() {
+        //Create admin credentials
+        Admin admin = new Admin("admin", "adminpass");
+        boolean userLogin = false;
+        boolean adminLogin = false;
+
+        //Get username and password entered by user
         DynamicForm userForm = Form.form().bindFromRequest();
         String username = userForm.data().get("userName");
         String password = userForm.data().get("password");
 
-        Admin admin = Admin.find.where().eq("userName", username).findUnique();
+        //Find unique username from db
         User user = User.find.where().eq("userName", username).findUnique();
 
+        //Authenticate user's password
         if(user != null && user.authenticate(password)) {
             session("user_id", user.id.toString());
             flash("success", "Welcome back " + user.userName);
+            userLogin = true;
 
-        } else if(admin != null && admin.authenticate(password)) {
-            session("admin_id", admin.id.toString());
-            flash ("success", "Welcome admin " + admin.userName);
+        //Authenticate admin's password
+        } else if(username.equals(admin.userName) && admin.authenticate(password)) {
+            adminLogin = true;
 
         } else {
             flash("error", "Invalid login. Check your username and password.");
             return redirect(routes.UserActivity.loginForm());
         }
 
-        return ok();
+        if(userLogin)
+            return redirect(routes.UserActivity.show());
+        else
+            return redirect(routes.UserActivity.showAdmin());
     }
 
     // Route: POST /user
@@ -99,14 +110,13 @@ public class UserActivity extends Controller {
     //  Shows the User profile 'id'
     public Result show() {
         List<Tool> tools = Tool.find.all();
-
         return ok(views.html.user.index.render(tools));
     }
-
+    //Route: GET /admin
+    //Shows the admin homepage
     public Result showAdmin() {
-        return ok();
+        return ok(views.html.user.admin.render());
     }
-
 
     public Result profile() {
         return ok(views.html.user.profile.render());

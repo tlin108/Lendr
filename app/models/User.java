@@ -53,12 +53,9 @@ public class User extends Model {
     return userName;
   }
 
-  // NOT FOR PRODUCTION - must ensure this is a valid user first. I have not done that.
-
   public boolean authenticate(String password) {
-      return BCrypt.checkpw(password, this.password_hash);
+    return BCrypt.checkpw(password, this.password_hash);
   }
-
 
   public static User createNewUser(String userName, String password, String firstname, String lastname, String email, String address, String phonenum) {
   	if(password == null || userName == null || firstname == null || lastname == null || phonenum == null ||
