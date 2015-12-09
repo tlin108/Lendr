@@ -119,7 +119,7 @@ public class UserActivity extends Controller {
     //Shows the admin homepage
     @Security.Authenticated(UserAuth.class)
     public Result showAdmin() {
-        return ok(views.html.user.admin.render());
+        return ok(views.html.admin.index.render());
     }
 
     //Roure: GET/profile
