@@ -2,6 +2,7 @@ package controllers;
 
 import models.User;
 import models.Tool;
+import models.Comment;
 import play.mvc.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -22,17 +23,21 @@ public class Tools extends Controller {
     // Route: GET /tool
     public Result index() {
         // Need to find a way to filter the list of tool by ownerId
-        //Long ownerId = Long.parseLong(session().get("user_id"));
-
-        //for now I'll just put all tools
-        List<Tool> tools = Tool.find.all();
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        User owner = User.find.byId(ownerId);
+        List<Tool> tools = owner.toolList;
 
         return ok(views.html.tool.index.render(tools));
     }
 
     // Route: GET /tool/:id
     public Result show(Long id) {
-        return ok("This is the tool/show page for tool of id: " + String.valueOf(id) + "\n");
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        User owner = User.find.byId(ownerId);
+        Tool tool = Tool.find.byId(id);
+        List<Comment> comments = tool.commentList;
+
+        return ok(views.html.tool.item.render(tool, owner, comments));
     }
 
     // Route: DELETE /tool/:id
@@ -45,9 +50,28 @@ public class Tools extends Controller {
         return ok();
     }
 
-    // Route: PUT /tool/:id
-    public Result update(Long id) {
-       return ok();
+    // Route: GET /borrow/:id
+    public Result lend(Long id) {
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        User owner = User.find.byId(ownerId);
+        Tool tool = Tool.find.byId(id);
+        tool.available = true;
+        tool.save();
+        List<Comment> comments = tool.commentList;
+
+       return ok(views.html.tool.item.render(tool,owner,comments));
+    }
+
+    // Route: GET /borrow/:id
+    public Result borrow(Long id) {
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        User owner = User.find.byId(ownerId);
+        Tool tool = Tool.find.byId(id);
+        tool.available = false;
+        tool.save();
+        List<Comment> comments = tool.commentList;
+
+       return ok(views.html.tool.item.render(tool,owner,comments));
     }
 
     // Route: GET /tool/new
@@ -73,7 +97,7 @@ public class Tools extends Controller {
         tool.save();
 
         flash("success", "Added new tool"+tool.name);
-        return redirect(routes.UserActivity.show(ownerId));
+        return redirect(routes.UserActivity.show());
     }
 
 }

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.validation.Constraint;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 
@@ -21,43 +22,36 @@ public class User extends Model {
 
   @Constraints.Required
   @Column(unique=true)
-  private String userName;
+
+  public String userName;
 
   @Constraints.Required
-  private String password_hash;
+  public String password_hash;
 
   @Constraints.Required
-  private String firstName;
+  public String firstName;
 
   @Constraints.Required
-  private String lastName;
+  public String lastName;
+
+  public String address;
 
   @Constraints.Required
-  private String address;
+  public String phoneNum;
 
-  @Constraints.Required
-  private String phoneNum;
-
-  @Constraints.Required
-  private String email;
+  public String email;
 
   //public List<User> userList;
+
+  @OneToMany
+  public List<Tool> toolList;
 
   // A finder object for easier querying
   public static Finder<Long, User> find = new Finder<Long, User>(User.class);
 
-  //Get methods
-  public Long getId() { return id; }
   public String getUserName(){
     return userName;
   }
-
-  public String getPassword_hash() { return password_hash; }
-  public String getFirstName() { return firstName; }
-  public String getLastName() {return lastName; }
-  public String getAddress() { return address; }
-  public String getPhoneNum() { return phoneNum; }
-  public String getEmail() { return email; }
 
   // NOT FOR PRODUCTION - must ensure this is a valid user first. I have not done that.
 

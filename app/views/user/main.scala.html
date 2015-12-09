@@ -24,9 +24,11 @@
     </head>
     <body class="darken">
 
+        @header()
+
         @content
 
-        @user.footer()
+        @footer()
 
         <script src="@routes.Assets.versioned("javascripts/bootstrap.js")" type="text/javascript"></script>
         <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")" type="text/javascript"></script>

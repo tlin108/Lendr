@@ -1,0 +1,65 @@
+@(tool: Tool, curUser:User, comments:List[Comment])
+
+@user.main("Tool Page"){
+
+	    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+                <div class="thumbnail">
+                    <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+                    <div class="caption-full">
+                    	@if(tool.available && tool.owner.getUserName() != curUser.getUserName()){
+                    	<a class="btn btn-primary pull-right" href="/tool/borrow/@tool.id">Borrow</a>
+                    	}
+                        @if((!tool.available) && tool.owner.getUserName() != curUser.getUserName()){
+                    	<h4 class="pull-right">Not Available</h4>
+                    	}
+                        <h4><a href="#">@tool.name</a>
+                        <p>@tool.description</p>
+                        <a class="btn btn-primary pull-right" href="#">Message</a>
+                        <p>Owner: @tool.owner.getUserName()</p>
+                    </div>
+                    <div class="ratings">
+                        <p class="pull-right">3 reviews</p>
+                        <p>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            4.0 stars
+                        </p>
+                    </div>
+                </div>
+
+                <div class="well">
+
+                    <div class="text-right">
+                        <a class="btn btn-primary" href="/comment/new/@tool.id">Leave a Review</a>
+                    </div>
+
+                    <hr>
+
+                    @if(comments.isEmpty()){
+                        <h2> No comment posted</h2>
+                    } else {
+                        @for(comment <- comments){
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>@comment.body</p>
+                                    <p>By User: @comment.poster</p>
+                                    <p>At Time: @comment.datetime_posted</p>
+                                </div>
+                            </div>
+                            <hr>
+                        }
+                    }
+                </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+}

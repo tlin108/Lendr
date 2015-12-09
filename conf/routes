@@ -10,22 +10,30 @@ GET     /                           controllers.Application.index()
 # We allow some CRUD operations on Resources
 
 #UserAcitvity
+=======
+GET     /admin                     controllers.UserActivity.showAdmin()
+
 GET     /user/new                  controllers.UserActivity.createForm()
 POST    /user                      controllers.UserActivity.create()
-DELETE  /user/:id                  controllers.UserActivity.delete(id: Long)
-PUT     /user/:id                  controllers.UserActivity.update(id: Long)
-GET     /user/:id                  controllers.UserActivity.show(id: Long)
+DELETE  /user/                     controllers.UserActivity.delete()
+PUT     /user/                     controllers.UserActivity.update()
+GET     /user/                     controllers.UserActivity.show()
 GET     /user/login/form           controllers.UserActivity.loginForm()
 POST    /user/login                controllers.UserActivity.login()
-
+GET		/user/logout			   controllers.UserActivity.logout()
+GET		/user/profile			   controllers.UserActivity.profile()
 
 #Tool
 GET     /tool                      controllers.Tools.index()
 GET     /tool/new                  controllers.Tools.createForm()
 GET     /tool/:id                  controllers.Tools.show(id: Long)
 DELETE  /tool/:id                  controllers.Tools.delete(id: Long)
-PUT     /tool/:id                  controllers.Tools.update(id: Long)
+GET     /tool/borrow/:id           controllers.Tools.borrow(id: Long)
+GET		/tool/lend/:id 			   controllers.Tools.lend(id: Long)
 POST    /tool                      controllers.Tools.create()
+
+GET		/comment/new/:id		   controllers.Comments.createForm(id: Long)
+POST	/Comments 				   controllers.Comments.create(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

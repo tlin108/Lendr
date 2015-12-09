@@ -4,6 +4,9 @@ import com.avaje.ebean.Model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import java.util.List;
 
 @Entity
 public class Tool extends Model {
@@ -13,12 +16,18 @@ public class Tool extends Model {
   public String name;
   
   public String description;
+
+  public boolean available;
   
   @ManyToOne
+  @JoinColumn(name = "user_id")
   public User owner;
 
   @ManyToOne
   public ToolCategory toolcategory;
+
+  @OneToMany
+  public List<Comment> commentList;
   
   // A finder object for easier querying
   public static Finder<Long, Tool> find = new Finder<Long, Tool>(Tool.class);
@@ -32,6 +41,7 @@ public class Tool extends Model {
     tool.name = toolName;
     tool.description = toolDescription;
     tool.owner = toolOwner;
+    tool.available = true;
 
     return tool;
   }

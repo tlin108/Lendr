@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Admin;
 import models.User;
 import models.Tool;
 import play.*;
@@ -37,23 +38,22 @@ public class UserActivity extends Controller {
         String username = userForm.data().get("userName");
         String password = userForm.data().get("password");
 
+        Admin admin = Admin.find.where().eq("userName", username).findUnique();
         User user = User.find.where().eq("userName", username).findUnique();
 
         if(user != null && user.authenticate(password)) {
-            session("user_id", user.getId().toString());
-            flash("success", "Welcome back " + user.getUserName());
-            return redirect(routes.UserActivity.show(user.getId()));
-            //return redirect(routes.Application.profile());
+            session("user_id", user.id.toString());
+            flash("success", "Welcome back " + user.userName);
 
+        } else if(admin != null && admin.authenticate(password)) {
+            session("admin_id", admin.id.toString());
+            flash ("success", "Welcome admin " + admin.userName);
 
         } else {
             flash("error", "Invalid login. Check your username and password.");
             return redirect(routes.UserActivity.loginForm());
         }
-    }
 
-    public Result profile(Long id) {
-        return ok("Success! You've logged in. Profile Id: " + String.valueOf(id));
     }
 
     // Route: POST /user
@@ -77,30 +77,38 @@ public class UserActivity extends Controller {
 
         user.save();
 
-        flash("success", "Welcome new user " + user.getUserName());
-        session("user_id", user.getId().toString());
-        return redirect(routes.UserActivity.show(user.getId()));
+        flash("success", "Welcome new user " + user.userName);
+        session("user_id", user.id.toString());
+        return redirect(routes.UserActivity.show());
     }
 
     // Route: DELETE /user/:id
     //  Delete a User account from data base.
-    public Result delete(Long id) {
+    public Result delete() {
         return ok();
     }
 
     // Route: PUT   /user/:id
     //  Update a User account by using it's registered form.
-    public Result update(Long id) {
+    public Result update() {
         return ok();
     }
 
     // Route: GET /users/:id
     //  Shows the User profile 'id'
-    //  There's an issue here... why is 'new' in user/new NOT taken as an 'id' but 'login' in user/login IS taken as 'id'
-    public Result show(Long id) {
+    public Result show() {
         List<Tool> tools = Tool.find.all();
 
         return ok(views.html.user.index.render(tools));
+    }
+
+    public Result showAdmin() {
+        return ok();
+    }
+
+
+    public Result profile() {
+        return ok(views.html.user.profile.render());
     }
 
     public Result logout() {
