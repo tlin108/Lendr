@@ -24,7 +24,6 @@ public class User extends Model {
   @Column(unique=true)
   public String userName;
 
-
   public String password_hash;
 
   @Constraints.Required
@@ -33,12 +32,10 @@ public class User extends Model {
   @Constraints.Required
   public String lastName;
 
-
   public String address;
 
   @Constraints.Required
   public String phoneNum;
-
 
   public String email;
 

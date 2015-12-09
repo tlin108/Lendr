@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Admin;
 import models.User;
 import models.Tool;
 import play.*;
@@ -37,15 +38,20 @@ public class UserActivity extends Controller {
         String username = userForm.data().get("userName");
         String password = userForm.data().get("password");
 
+        Admin admin = Admin.find.where().eq("userName", username).findUnique();
         User user = User.find.where().eq("userName", username).findUnique();
 
         if(user != null && user.authenticate(password)) {
             session("user_id", user.id.toString());
             flash("success", "Welcome back " + user.userName);
+
+        } else if(admin != null && admin.authenticate(password)) {
+            session("admin_id", admin.id.toString());
+            flash ("success", "Welcome admin " + admin.userName);
+
         } else {
             flash("error", "Invalid login. Check your username and password.");
         }
-        
         return redirect(routes.UserActivity.show());
     }
 
@@ -87,12 +93,16 @@ public class UserActivity extends Controller {
 
     // Route: GET /users/:id
     //  Shows the User profile 'id'
-    //  There's an issue here... why is 'new' in user/new NOT taken as an 'id' but 'login' in user/login IS taken as 'id'
     public Result show() {
         List<Tool> tools = Tool.find.all();
 
         return ok(views.html.user.index.render(tools));
     }
+
+    public Result showAdmin() {
+        return ok();
+    }
+
 
     public Result profile() {
         return ok(views.html.user.profile.render());
