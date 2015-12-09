@@ -54,6 +54,7 @@ public class UserActivity extends Controller {
             return redirect(routes.UserActivity.loginForm());
         }
 
+        return ok();
     }
 
     // Route: POST /user

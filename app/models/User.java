@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 public class User extends Model {
   @Id
-  private Long id;
+  public Long id;
 
   @Constraints.Required
   @Column(unique=true)

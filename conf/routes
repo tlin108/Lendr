@@ -10,7 +10,6 @@ GET     /                           controllers.Application.index()
 # We allow some CRUD operations on Resources
 
 #UserAcitvity
-=======
 GET     /admin                     controllers.UserActivity.showAdmin()
 
 GET     /user/new                  controllers.UserActivity.createForm()
