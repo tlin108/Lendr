@@ -118,7 +118,7 @@ public class UserActivity extends Controller {
     //Route: GET /admin
     //Shows the admin homepage
     public Result showAdmin() {
-        return ok(views.html.user.admin.render());
+        return ok(views.html.admin.index.render());
     }
 
     //Roure: GET/profile
