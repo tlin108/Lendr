@@ -16,6 +16,7 @@ create table tool (
   id                        bigserial not null,
   name                      varchar(255),
   description               varchar(255),
+  img_url                   varchar(255),
   available                 boolean,
   user_id                   bigint,
   tool_category_id          bigint,
