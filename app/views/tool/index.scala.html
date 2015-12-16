@@ -1,4 +1,4 @@
-@(tools: List[Tool])
+@(tools: List[Tool], categories: List[ToolCategory])
 
 @user.main("My Tools") {
 
@@ -6,7 +6,7 @@
     <div class="container">
 
         <div class="row">
-            @user.sideNavi()
+            @user.sideNavi(categories)
 
             @if(tools.isEmpty()){
                 <h2 class="white">No tools posted</h2>
@@ -19,17 +19,16 @@
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">@tool.id</h4>
                                 <h4><a href="/tool/@tool.id">@tool.name</a>
                                 </h4>
-                                <p>@tool.description</p>
                                 @if(tool.available){
-                                    <p>Hosting</p>
+                                    <a class="btn btn-primary" href="/tool/borrow/@tool.id">Stop Lending</a>
                                 } else {
-                                    <a class="btn btn-primary" href="/tool/lend/@tool.id">Lend</a>
+                                    <a class="btn btn-primary" href="/tool/lend/@tool.id">Start Lending</a>
                                 }
                             </div>
                             <div class="ratings">
+                                <p class="pull-left">@tool.toolcategory.name</p>
                                 <p class="pull-right">@tool.commentList.size() comments</p>
                                 <br><br>
                             </div>

@@ -27,6 +27,7 @@ public class Tool extends Model {
   public User owner;
 
   @ManyToOne
+  @JoinColumn(name = "tool_category_id")
   public ToolCategory toolcategory;
 
   @OneToMany
@@ -36,8 +37,8 @@ public class Tool extends Model {
   public static Finder<Long, Tool> find = new Finder<Long, Tool>(Tool.class);
 
 
-  public static Tool createNewTool(String toolName, String toolDescription, User toolOwner) {
-    if(toolName == null || toolDescription == null || toolOwner == null || toolName.length() == 0 || toolDescription.length() == 0){
+  public static Tool createNewTool(String toolName, String toolDescription, User toolOwner, ToolCategory category) {
+    if(toolName == null || toolDescription == null || toolOwner == null || category == null || toolName.length() == 0 || toolDescription.length() == 0){
       return null;
     }
 
@@ -46,6 +47,7 @@ public class Tool extends Model {
     tool.description = toolDescription;
     tool.owner = toolOwner;
     tool.available = true;
+    tool.toolcategory = category;
 
     return tool;
   }

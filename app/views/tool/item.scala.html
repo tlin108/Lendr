@@ -10,20 +10,38 @@
                 <div class="thumbnail">
                     <img class="img-responsive" src="http://placehold.it/800x300" alt="">
                     <div class="caption-full">
-                    	@if(tool.available && tool.owner.getUserName() != curUser.getUserName()){
-                    	<a class="btn btn-primary pull-right" href="/tool/borrow/@tool.id">Borrow</a>
-                    	}
-                        @if((!tool.available) && tool.owner.getUserName() != curUser.getUserName()){
-                    	<h4 class="pull-right">Not Available</h4>
-                    	} else {
-                        <a class="btn btn-primary pull-right" href="">Remove</a>
+                        <div class="col-sm-2">
+                        <p class="pull-left">Owner: @tool.owner.getUserName()</p>
+                        </div>
+                        <div class="col-sm-8">
+                        <h4><a href="#" style="text-align: center;">@tool.name</a></h4>
+                        </div>
+                    	@if(tool.available){
+                            @if(tool.owner.getUserName() != curUser.getUserName()){
+                               <div class="col-sm-2">
+                    	       <a class="btn btn-primary pull-right" href="/tool/borrow/@tool.id">Borrow</a>
+                               </div>
+                            } else {
+                                <div class="col-sm-2">
+                                  <h4 class="pull-right">Hosting</h4>
+                                </div>
+                            }
+                        } else {
+                            <div class="col-sm-2">
+                            <h4 class="pull-right">Not Available</h4>
+                            </div>
+                        } 
+                        <!--
+                        else {
+                        <form role="form" action="@routes.Tools.delete(tool.id)" method="delete"><button class="btn btn-primary pull-right" type="submit">Remove</button></form>
                         }
-                        <h4><a href="#">@tool.name</a>
+                        -->
+                        <hr>
                         <p>@tool.description</p>
-                        <a class="btn btn-primary pull-right" href="#">Message</a>
-                        <p>Owner: @tool.owner.getUserName()</p>
                     </div>
+                    <hr>
                     <div class="ratings">
+                        <p class="pull-left">Category: @tool.toolcategory.name</p>
                         <p class="pull-right">@tool.commentList.size() comments</p>
                         <br><br>
                     </div>
@@ -33,6 +51,7 @@
                 <div class="well">
 
                     <div class="text-right">
+                        <a class="btn btn-primary" href="#">Message</a>
                         <a class="btn btn-primary" href="/comment/new/@tool.id">Leave a Comment</a>
                     </div>
 

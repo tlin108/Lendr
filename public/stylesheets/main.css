@@ -69,6 +69,12 @@ body {
     color: #333;
 }
 
+#category {
+    width:350px;
+    font-size:18px;
+    padding:10px 5px;
+}
+
 footer {
     margin: 50px 0;
 }

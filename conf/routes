@@ -21,6 +21,7 @@ GET     /user/login/form           controllers.UserActivity.loginForm()
 POST    /user/login                controllers.UserActivity.login()
 GET		/user/logout			   controllers.UserActivity.logout()
 GET		/user/profile			   controllers.UserActivity.profile()
+GET		/user/category/:id 		   controllers.UserActivity.categoryFilter(id: Long)
 
 #Tool
 GET     /tool                      controllers.Tools.index()

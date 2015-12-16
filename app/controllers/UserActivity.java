@@ -3,6 +3,7 @@ package controllers;
 import models.Admin;
 import models.User;
 import models.Tool;
+import models.ToolCategory;
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -113,7 +114,9 @@ public class UserActivity extends Controller {
     @Security.Authenticated(UserAuth.class)
     public Result show() {
         List<Tool> tools = Tool.find.all();
-        return ok(views.html.user.index.render(tools));
+        List<ToolCategory> categories = ToolCategory.find.all();
+
+        return ok(views.html.user.index.render(tools, categories));
     }
     //Route: GET /admin
     //Shows the admin homepage
@@ -130,6 +133,14 @@ public class UserActivity extends Controller {
         User user = User.find.byId(userId);
 
         return ok(views.html.user.profile.render(user));
+    }
+
+    public Result categoryFilter(Long id){
+        List<ToolCategory> categories = ToolCategory.find.all();
+        ToolCategory category = ToolCategory.find.byId(id);
+        List<Tool> tools = category.toolList;
+
+        return ok(views.html.user.index.render(tools, categories));
     }
 
     public Result logout() {

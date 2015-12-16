@@ -1,8 +1,14 @@
-            <div class="col-md-3">
-                <p class="lead white">Tool Category</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Hammer</a>
-                    <a href="#" class="list-group-item">Drill</a>
-                    <a href="#" class="list-group-item">Screwdrivers</a>
-                </div>
-            </div>
+@(categories: List[ToolCategory])
+
+<div class="col-md-3">
+  <p class="lead white">Filter Category By</p>
+  <div class="list-group">
+  	@if(categories.isEmpty()){
+  		<h2 class="white">No category created</h2>
+  	} else {
+  		@for(c <- categories ){
+  			<a href="/user/category/@c.id" class="list-group-item">@c.name</a>
+  		}
+  	}
+  </div>
+</div>

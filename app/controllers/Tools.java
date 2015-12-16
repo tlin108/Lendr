@@ -3,6 +3,7 @@ package controllers;
 import models.User;
 import models.Tool;
 import models.Comment;
+import models.ToolCategory;
 import play.mvc.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -27,8 +28,9 @@ public class Tools extends Controller {
         Long ownerId = Long.parseLong(session().get("user_id"));
         User owner = User.find.byId(ownerId);
         List<Tool> tools = owner.toolList;
+        List<ToolCategory> categories = ToolCategory.find.all();
 
-        return ok(views.html.tool.index.render(tools));
+        return ok(views.html.tool.index.render(tools, categories));
     }
 
     // Route: GET /tool/:id
@@ -51,8 +53,9 @@ public class Tools extends Controller {
         Long ownerId = Long.parseLong(session().get("user_id"));
         User owner = User.find.byId(ownerId);
         List<Tool> tools = owner.toolList;
+        List<ToolCategory> categories = ToolCategory.find.all();
 
-        return ok(views.html.tool.index.render(tools));
+        return ok(views.html.tool.index.render(tools, categories));
     }
 
     // Route: GET /tool/:id/edit
@@ -89,7 +92,9 @@ public class Tools extends Controller {
     // Route: GET /tool/new
     @Security.Authenticated(UserAuth.class)
     public Result createForm() {
-        return ok(views.html.tool.createform.render());
+        List<ToolCategory> categories = ToolCategory.find.all();
+
+        return ok(views.html.tool.createform.render(categories));
     }
 
     // Route: POST /tool
@@ -98,10 +103,14 @@ public class Tools extends Controller {
         DynamicForm toolForm = Form.form().bindFromRequest();
         String name = toolForm.data().get("name");
         String description = toolForm.data().get("description");
+        String categoryId = toolForm.data().get("category_id");
+
         Long ownerId = Long.parseLong(session().get("user_id"));
         User owner = User.find.byId(ownerId);
 
-        Tool tool = Tool.createNewTool (name,description,owner);
+        ToolCategory tool_category = ToolCategory.find.byId(Long.parseLong(categoryId));
+
+        Tool tool = Tool.createNewTool (name,description,owner,tool_category);
 
         if(tool == null ){
             flash("error", "Invalid tool, please enter all required informations");
