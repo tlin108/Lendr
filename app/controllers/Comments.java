@@ -3,6 +3,7 @@ package controllers;
 import models.ToolCategory;
 import models.User;
 import models.Tool;
+import models.ToolCategory;
 import models.Comment;
 import play.*;
 import play.data.DynamicForm;
@@ -55,6 +56,7 @@ public class Comments extends Controller {
     public Result show() {
         List<Tool> tools = Tool.find.all();
         List<ToolCategory> categories = ToolCategory.find.all();
+
         return ok(views.html.user.index.render(tools, categories));
     }
 

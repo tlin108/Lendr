@@ -8,6 +8,8 @@ import play.mvc.*;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.*;
+import javax.persistence.*;
+import play.db.ebean.Model;
 
 
 import java.util.List;
@@ -121,6 +123,14 @@ public class Tools extends Controller {
 
         flash("success", "Added new tool"+tool.name);
         return redirect(routes.UserActivity.show());
+    }
+
+    public Result categoryFilter(Long category_id){
+        List<ToolCategory> categories = ToolCategory.find.all();
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        List<Tool> tools = Tool.searchByUserAndCategory(ownerId, category_id);
+
+        return ok(views.html.tool.index.render(tools, categories));
     }
 
 }
