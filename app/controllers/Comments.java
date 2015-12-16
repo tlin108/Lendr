@@ -1,5 +1,6 @@
 package controllers;
 
+import models.ToolCategory;
 import models.User;
 import models.Tool;
 import models.Comment;
@@ -7,8 +8,6 @@ import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.*;
-
-
 import java.util.List;
 
 import static play.data.Form.form;
@@ -55,8 +54,8 @@ public class Comments extends Controller {
     //  There's an issue here... why is 'new' in user/new NOT taken as an 'id' but 'login' in user/login IS taken as 'id'
     public Result show() {
         List<Tool> tools = Tool.find.all();
-
-        return ok(views.html.user.index.render(tools));
+        List<ToolCategory> categories = ToolCategory.find.all();
+        return ok(views.html.user.index.render(tools, categories));
     }
 
 
