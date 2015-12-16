@@ -106,13 +106,14 @@ public class Tools extends Controller {
         String name = toolForm.data().get("name");
         String description = toolForm.data().get("description");
         String categoryId = toolForm.data().get("category_id");
+        String image = toolForm.data().get("image");
 
         Long ownerId = Long.parseLong(session().get("user_id"));
         User owner = User.find.byId(ownerId);
 
         ToolCategory tool_category = ToolCategory.find.byId(Long.parseLong(categoryId));
 
-        Tool tool = Tool.createNewTool (name,description,owner,tool_category);
+        Tool tool = Tool.createNewTool (name,description,owner,tool_category, image);
 
         if(tool == null ){
             flash("error", "Invalid tool, please enter all required informations");

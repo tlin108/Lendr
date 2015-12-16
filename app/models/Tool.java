@@ -20,6 +20,8 @@ public class Tool extends Model {
   
   public String description;
 
+  public String imgURL;
+
   public boolean available;
   
   @ManyToOne
@@ -37,8 +39,9 @@ public class Tool extends Model {
   public static Finder<Long, Tool> find = new Finder<Long, Tool>(Tool.class);
 
 
-  public static Tool createNewTool(String toolName, String toolDescription, User toolOwner, ToolCategory category) {
-    if(toolName == null || toolDescription == null || toolOwner == null || category == null || toolName.length() == 0 || toolDescription.length() == 0){
+  public static Tool createNewTool(String toolName, String toolDescription, User toolOwner, ToolCategory category, String image) {
+    if(toolName == null || toolDescription == null || toolOwner == null || category == null ||
+            toolName.length() == 0 || toolDescription.length() == 0 || image == null){
       return null;
     }
 
@@ -48,6 +51,7 @@ public class Tool extends Model {
     tool.owner = toolOwner;
     tool.available = true;
     tool.toolcategory = category;
+    tool.imgURL = image;
 
     return tool;
   }
