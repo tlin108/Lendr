@@ -31,6 +31,7 @@ DELETE  /tool/:id                  controllers.Tools.delete(id: Long)
 GET     /tool/borrow/:id           controllers.Tools.borrow(id: Long)
 GET		/tool/lend/:id 			   controllers.Tools.lend(id: Long)
 POST    /tool                      controllers.Tools.create()
+GET		/tool/category/:id 		   controllers.Tools.categoryFilter(id: Long)
 
 GET		/comment/new/:id		   controllers.Comments.createForm(id: Long)
 POST	/comments 				   controllers.Comments.create(id: Long)

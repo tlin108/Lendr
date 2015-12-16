@@ -6,7 +6,7 @@
     <div class="container">
 
         <div class="row">
-            @user.sideNavi(categories)
+            @tool.sideNavi(categories)
 
             @if(tools.isEmpty()){
                 <h2 class="white">No tools posted</h2>
@@ -22,9 +22,9 @@
                                 <h4><a href="/tool/@tool.id">@tool.name</a>
                                 </h4>
                                 @if(tool.available){
-                                    <a class="btn btn-primary" href="/tool/borrow/@tool.id">Stop Lending</a>
+                                    <a class="btn btn-normal" href="/tool/borrow/@tool.id">Stop Lending</a>
                                 } else {
-                                    <a class="btn btn-primary" href="/tool/lend/@tool.id">Start Lending</a>
+                                    <a class="btn btn-normal" href="/tool/lend/@tool.id">Start Lending</a>
                                 }
                             </div>
                             <div class="ratings">
@@ -39,7 +39,7 @@
             <div class="col-sm-4 col-lg-4 col-md-4">
                 <h4><a href="#">Want to add more tools?</a></h4>
                 <p class="white">Click on the button below to add your own tool for others to borrow!</p>
-                <a class="btn btn-primary" target="_blank" href="@routes.Tools.createForm()">Add Tool</a>
+                <a class="btn btn-normal" target="_blank" href="@routes.Tools.createForm()">Add Tool</a>
             </div>
             </div>
             </div>
