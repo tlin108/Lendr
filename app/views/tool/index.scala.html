@@ -11,38 +11,69 @@
             @if(tools.isEmpty()){
                 <h2 class="white">No tools posted</h2>
              } else {
-                <h2 class="white">My Tools</h2>
+                <h2 class="white">My Tool List</h2>
                 <div class="col-md-9">
-                <div class="row">
                     @for(tool <- tools) {
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
+                    <div class="row thumbnail">
+                        <br>
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                            <div>
+                                <img src="@tool.imgURL" alt="">
+                            </div>
+                        </div>
+                        <div class="col-sm-5 col-lg-5 col-md-5">
                             <div class="caption">
                                 <h4><a href="/tool/@tool.id">@tool.name</a>
                                 </h4>
                                 @if(tool.available){
-                                    <a class="btn btn-normal" href="/tool/borrow/@tool.id">Stop Lending</a>
+                                    <h4>Status: Hosting</h4>
                                 } else {
-                                    <a class="btn btn-normal" href="/tool/lend/@tool.id">Start Lending</a>
+                                    <h4>Status: On Hold</h4>
                                 }
                             </div>
                             <div class="ratings">
-                                <p class="pull-left">@tool.toolcategory.name</p>
+                                <p class="pull-left">Category: @tool.toolcategory.name</p>
                                 <p class="pull-right">@tool.commentList.size() comments</p>
                                 <br><br>
                             </div>
                         </div>
+                        <div class="col-sm-3 col-lg-3 col-md-3">
+                            <form role="form" action="@routes.Tools.delete(tool.id)" method="post">
+                            <a class="btn btn-normal" href="/tool/@tool.id" id="divider-button">View Tool</a>
+                            <a class="btn btn-green" href="/tool/lend/@tool.id" id="divider-button">Start Lending</a>
+                            <a class="btn btn-blue" href="/tool/borrow/@tool.id" id="divider-button">Stop Lending</a>
+                            <button type="button" class="btn btn-red" data-toggle="modal" data-target="#myModal">Remove Tool</button>
+                            <!-- Button trigger modal -->
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Delete Tool</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p> Are you sure you want to remove ?</p>
+                                    <p> Tool Name: @tool.name</p>
+                                    <p> Tool Category: @tool.toolcategory.name</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-red" type="submit">Remove</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            </form>
+                            <br>
+                        </div>
                     </div>
+                    <hr>
                     }
+                </div>
+                </div>
             }
-            <div class="col-sm-4 col-lg-4 col-md-4">
-                <h4><a href="#">Want to add more tools?</a></h4>
-                <p class="white">Click on the button below to add your own tool for others to borrow!</p>
-                <a class="btn btn-normal" target="_blank" href="@routes.Tools.createForm()">Add Tool</a>
-            </div>
-            </div>
-            </div>
         </div>
     </div>
 }
