@@ -26,7 +26,6 @@ public class Tools extends Controller {
     // Route: GET /tool
     @Security.Authenticated(UserAuth.class)
     public Result index() {
-        // Need to find a way to filter the list of tool by ownerId
         Long ownerId = Long.parseLong(session().get("user_id"));
         User owner = User.find.byId(ownerId);
         List<Tool> tools = owner.toolList;
@@ -34,6 +33,16 @@ public class Tools extends Controller {
 
         return ok(views.html.tool.index.render(tools, categories));
     }
+
+    @Security.Authenticated(UserAuth.class)
+    public Result borrowIndex() {
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        User owner = User.find.byId(ownerId);
+        List<Tool> tools = owner.borrowToolList;
+        List<ToolCategory> categories = ToolCategory.find.all();
+
+        return ok(views.html.tool.borrowindex.render(tools, categories));
+    } 
 
     // Route: GET /tool/:id
     @Security.Authenticated(UserAuth.class)
@@ -81,14 +90,31 @@ public class Tools extends Controller {
     // Route: GET /borrow/:id
     @Security.Authenticated(UserAuth.class)
     public Result borrow(Long id) {
-        Long ownerId = Long.parseLong(session().get("user_id"));
-        User owner = User.find.byId(ownerId);
+        Long userId = Long.parseLong(session().get("user_id"));
+        User user = User.find.byId(userId);
         Tool tool = Tool.find.byId(id);
+        tool.borrower = user;
         tool.available = false;
         tool.save();
         List<Comment> comments = tool.commentList;
 
-       return ok(views.html.tool.item.render(tool,owner,comments));
+       return ok(views.html.tool.item.render(tool,user,comments));
+    }
+
+    // Route: GET /return/:id
+    @Security.Authenticated(UserAuth.class)
+    public Result returnTool(Long id) {
+        Tool tool = Tool.find.byId(id);
+        tool.borrower = null;
+        tool.available = true;
+        tool.save();
+
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        User owner = User.find.byId(ownerId);
+        List<Tool> tools = owner.borrowToolList;
+        List<ToolCategory> categories = ToolCategory.find.all();
+
+       return ok(views.html.tool.borrowindex.render(tools, categories));
     }
 
     // Route: GET /tool/new
@@ -126,6 +152,7 @@ public class Tools extends Controller {
         return redirect(routes.UserActivity.show());
     }
 
+    @Security.Authenticated(UserAuth.class)
     public Result categoryFilter(Long category_id){
         List<ToolCategory> categories = ToolCategory.find.all();
         Long ownerId = Long.parseLong(session().get("user_id"));

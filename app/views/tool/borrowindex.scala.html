@@ -1,0 +1,51 @@
+@(tools: List[Tool], categories: List[ToolCategory])
+
+@user.main("Borrowed Tools") {
+
+	 <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            @tool.sideNavi(categories)
+
+            @if(tools.isEmpty()){
+                <h2 class="white">No tools posted</h2>
+             } else {
+                <h2 class="white">Borrowed Tool List</h2>
+                <div class="col-md-9">
+                    @for(tool <- tools) {
+                    <div class="row thumbnail">
+                        <br>
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                            <div>
+                                @if(tool.imgURL.length()==0){
+                                <a href="/tool/@tool.id"><img class="slide-image" src="http://placehold.it/800x300" alt=""></a>
+                                } else {
+                                    <a href="/tool/@tool.id"><img src="@tool.imgURL" alt=""></a>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-5 col-lg-5 col-md-5">
+                            <div class="caption">
+                                <h4><a href="/tool/@tool.id">@tool.name</a>
+                                </h4>
+                                <h4>Status: Borrowed</h4>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-left">Category: @tool.toolcategory.name</p>
+                                <p class="pull-right">@tool.commentList.size() comments</p>
+                                <br><br>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-lg-3 col-md-3">
+                            <a class="btn btn-normal btn-block" href="/tool/return/@tool.id" id="divider-button">Return Tool</a>
+                        </div>
+                    </div>
+                    <hr>
+                    }
+                </div>
+                </div>
+            }
+        </div>
+    </div>
+}

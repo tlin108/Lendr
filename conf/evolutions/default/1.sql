@@ -19,6 +19,7 @@ create table tool (
   img_url                   varchar(255),
   available                 boolean,
   user_id                   bigint,
+  borrower_id               bigint,
   tool_category_id          bigint,
   constraint pk_tool primary key (id))
 ;
@@ -46,8 +47,10 @@ alter table comment add constraint fk_comment_tool_1 foreign key (tool_id) refer
 create index ix_comment_tool_1 on comment (tool_id);
 alter table tool add constraint fk_tool_owner_2 foreign key (user_id) references users (id);
 create index ix_tool_owner_2 on tool (user_id);
-alter table tool add constraint fk_tool_toolcategory_3 foreign key (tool_category_id) references tool_category (id);
-create index ix_tool_toolcategory_3 on tool (tool_category_id);
+alter table tool add constraint fk_tool_borrower_3 foreign key (borrower_id) references users (id);
+create index ix_tool_borrower_3 on tool (borrower_id);
+alter table tool add constraint fk_tool_toolcategory_4 foreign key (tool_category_id) references tool_category (id);
+create index ix_tool_toolcategory_4 on tool (tool_category_id);
 
 
 

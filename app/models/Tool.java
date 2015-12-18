@@ -30,6 +30,10 @@ public class Tool extends Model {
   public User owner;
 
   @ManyToOne
+  @JoinColumn(name = "borrower_id")
+  public User borrower;
+
+  @ManyToOne
   @JoinColumn(name = "tool_category_id")
   public ToolCategory toolcategory;
 
