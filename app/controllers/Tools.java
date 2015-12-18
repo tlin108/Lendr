@@ -156,9 +156,18 @@ public class Tools extends Controller {
     public Result categoryFilter(Long category_id){
         List<ToolCategory> categories = ToolCategory.find.all();
         Long ownerId = Long.parseLong(session().get("user_id"));
-        List<Tool> tools = Tool.searchByUserAndCategory(ownerId, category_id);
+        List<Tool> tools = Tool.searchByUserAndCategory(ownerId, category_id, 1);
 
         return ok(views.html.tool.index.render(tools, categories));
+    }
+
+    @Security.Authenticated(UserAuth.class)
+    public Result borrowCategoryFilter(Long category_id){
+        List<ToolCategory> categories = ToolCategory.find.all();
+        Long ownerId = Long.parseLong(session().get("user_id"));
+        List<Tool> tools = Tool.searchByUserAndCategory(ownerId, category_id, 0);
+
+        return ok(views.html.tool.borrowindex.render(tools, categories));
     }
 
 }

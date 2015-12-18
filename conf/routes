@@ -25,6 +25,7 @@ GET		/home/category/:id         controllers.UserActivity.categoryFilter(id: Long
 
 #Tool
 GET		/user/tools/category/:id   controllers.Tools.categoryFilter(id: Long)
+GET		/user/borrowtools/category/:id controllers.Tools.borrowCategoryFilter(id: Long)
 GET     /user/tools                controllers.Tools.index()
 GET		/user/borrowtools		   controllers.Tools.borrowIndex()
 GET     /tool/new                  controllers.Tools.createForm()

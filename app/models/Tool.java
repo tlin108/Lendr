@@ -66,7 +66,10 @@ public class Tool extends Model {
     return tool;
   }
 
-  public static List<Tool> searchByUserAndCategory(Long user_Id, Long category_Id){
-    return find.where().eq("user_id",user_Id).eq("tool_category_id",category_Id).findList();
+  public static List<Tool> searchByUserAndCategory(Long user_Id, Long category_Id, int whichList){
+    if(whichList == 1)
+      return find.where().eq("user_id",user_Id).eq("tool_category_id",category_Id).findList();
+    else
+      return find.where().eq("borrower_id",user_Id).eq("tool_category_id",category_Id).findList();
   }
 }
