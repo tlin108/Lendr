@@ -3,14 +3,14 @@
 <div class="col-md-3">
   <p class="lead white">Filter Category By</p>
   <div class="list-group">
-      <a href="/user/" class="list-group-item">No Filter</a>
+      <a href="/home" class="list-group-item">No Filter</a>
   </div>
   <div class="list-group">
   	@if(categories.isEmpty()){
   		<h2 class="white">No category created</h2>
   	} else {
   		@for(c <- categories ){
-  			<a href="/user/category/@c.id" class="list-group-item">@c.name</a>
+  			<a href="/home/category/@c.id" class="list-group-item">@c.name</a>
   		}
   	}
   </div>
