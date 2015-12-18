@@ -117,6 +117,7 @@ public class UserActivity extends Controller {
         List<ToolCategory> categories = ToolCategory.find.all();
 
         return ok(views.html.user.index.render(tools, categories));
+        
     }
     //Route: GET /admin
     //Shows the admin homepage

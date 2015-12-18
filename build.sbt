@@ -20,4 +20,4 @@ libraryDependencies ++= Seq(
 // other, legacy style, accesses its actions statically.
 routesGenerator := InjectedRoutesGenerator
 
-PlayKeys.fileWatchService := play.runsupport.FileWatchService.sbt(2000)
+PlayKeys.fileWatchService := play.runsupport.FileWatchService.sbt(1000)

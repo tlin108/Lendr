@@ -8,7 +8,12 @@
         <div class="row">
 
                 <div class="thumbnail">
-                        <img class="img-responsive" src="@tool.imgURL" alt="">
+                        @if(tool.imgURL.length()==0){
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            } else {
+                                <img src="@tool.imgURL" alt="">
+                            }
+                        <br>
                     <div class="caption-full">
                         <div class="col-sm-2">
                         <p class="pull-left">Owner: @tool.owner.getUserName()</p>
@@ -28,7 +33,7 @@
                             }
                         } else {
                             <div class="col-sm-2">
-                            <h4 class="pull-right">Not Available</h4>
+                            <h4 class="pull-right">Borrowed or Not Available</h4>
                             </div>
                         } 
                         <!--

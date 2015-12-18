@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 import controllers.UserAuth;
 import play.mvc.Security;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -32,11 +33,16 @@ public class Tool extends Model {
   @JoinColumn(name = "tool_category_id")
   public ToolCategory toolcategory;
 
-  @OneToMany
+  @OneToMany(cascade=CascadeType.ALL)
   public List<Comment> commentList;
   
   // A finder object for easier querying
   public static Finder<Long, Tool> find = new Finder<Long, Tool>(Tool.class);
+
+  public static void deleteTool(Tool tool){
+    tool.commentList = null;
+    tool.delete();  
+  }
 
 
   public static Tool createNewTool(String toolName, String toolDescription, User toolOwner, ToolCategory category, String image) {

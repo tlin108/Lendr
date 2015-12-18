@@ -15,10 +15,16 @@
                 <div class="col-md-9">
                 <div class="row">
                     @for(tool <- tools) {
-                    @if(tool.available) {
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img src="@tool.imgURL" alt="">
+                            <div>
+                            <br>
+                            @if(tool.imgURL.length()==0){
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            } else {
+                                <img src="@tool.imgURL" alt="">
+                            }
+                            </div>
                             <div class="caption">
                                 <h4><a href="/tool/@tool.id">@tool.name</a>
                                 </h4>
@@ -32,15 +38,9 @@
                         </div>
                     </div>
                     }
-                    }
+                </div>
+                </div>
             }
-            <div class="col-sm-4 col-lg-4 col-md-4">
-                <h4><a href="#">Want to add your own tools?</a></h4>
-                <p class="white">Click on the button below to add your own tool for others to borrow!</p>
-                <a class="btn btn-normal" href="@routes.Tools.createForm()">Add Tool</a>
-            </div>
-            </div>
-            </div>
         </div>
     </div>
 
