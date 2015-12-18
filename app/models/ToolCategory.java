@@ -20,6 +20,7 @@ public class ToolCategory extends Model {
     @OneToMany
     public List<Tool> toolList;
 
+
     // A finder object for easier querying
     public static Finder<Long, ToolCategory> find = new Finder<Long, ToolCategory>(ToolCategory.class);
 

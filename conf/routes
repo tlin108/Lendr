@@ -21,9 +21,10 @@ GET     /user/login/form           controllers.UserActivity.loginForm()
 POST    /user/login                controllers.UserActivity.login()
 GET		/user/logout			   controllers.UserActivity.logout()
 GET		/user/profile			   controllers.UserActivity.profile()
-GET		/user/category/:id 		   controllers.UserActivity.categoryFilter(id: Long)
+GET		/home/category/:id         controllers.UserActivity.categoryFilter(id: Long)
 
 #Tool
+GET		/user/tools/category/:id   controllers.Tools.categoryFilter(id: Long)
 GET     /user/tools                controllers.Tools.index()
 GET     /tool/new                  controllers.Tools.createForm()
 GET     /tool/:id                  controllers.Tools.show(id: Long)
@@ -31,8 +32,8 @@ POST    /tool/:id                  controllers.Tools.delete(id: Long)
 GET     /tool/borrow/:id           controllers.Tools.borrow(id: Long)
 GET		/tool/lend/:id 			   controllers.Tools.lend(id: Long)
 POST    /tool                      controllers.Tools.create()
-GET		/tool/category/:id 		   controllers.Tools.categoryFilter(id: Long)
 
+#Comments
 GET		/comment/new/:id		   controllers.Comments.createForm(id: Long)
 POST	/comments 				   controllers.Comments.create(id: Long)
 
