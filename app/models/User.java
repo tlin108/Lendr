@@ -42,8 +42,11 @@ public class User extends Model {
 
   //public List<User> userList;
 
-  @OneToMany
+  @OneToMany(mappedBy = "owner")
   public List<Tool> toolList;
+
+  @OneToMany(mappedBy = "borrower")
+  public List<Tool> borrowToolList;
 
   // A finder object for easier querying
   public static Finder<Long, User> find = new Finder<Long, User>(User.class);

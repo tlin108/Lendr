@@ -29,12 +29,15 @@ GET     /about                     controllers.About.show()
 
 #Tool
 GET		/user/tools/category/:id   controllers.Tools.categoryFilter(id: Long)
+GET		/user/borrowtools/category/:id controllers.Tools.borrowCategoryFilter(id: Long)
 GET     /user/tools                controllers.Tools.index()
+GET		/user/borrowtools		   controllers.Tools.borrowIndex()
 GET     /tool/new                  controllers.Tools.createForm()
 GET     /tool/:id                  controllers.Tools.show(id: Long)
 POST    /tool/:id                  controllers.Tools.delete(id: Long)
 GET     /tool/borrow/:id           controllers.Tools.borrow(id: Long)
 GET		/tool/lend/:id 			   controllers.Tools.lend(id: Long)
+GET		/tool/return/:id 	       controllers.Tools.returnTool(id: Long)
 POST    /tool                      controllers.Tools.create()
 
 #Comments
