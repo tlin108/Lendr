@@ -3,7 +3,7 @@ body {
     overflow-x:hidden;
     font-family:"Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
     background-image:url(../images/bg2.jpg);
-    background-repeat:no-repeat;
+    background-repeat:none;
     background-attachment:scroll;
     background-position:center center;
     -webkit-background-size:cover;
