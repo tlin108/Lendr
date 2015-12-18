@@ -12,11 +12,11 @@ GET     /                           controllers.Application.index()
 #UserAcitvity
 GET     /admin                     controllers.UserActivity.showAdmin()
 
+GET     /home                      controllers.UserActivity.show()
 GET     /user/new                  controllers.UserActivity.createForm()
 POST    /user                      controllers.UserActivity.create()
 DELETE  /user/                     controllers.UserActivity.delete()
 PUT     /user/                     controllers.UserActivity.update()
-GET     /home/                     controllers.UserActivity.show()
 GET     /user/login/form           controllers.UserActivity.loginForm()
 POST    /user/login                controllers.UserActivity.login()
 GET		/user/logout			   controllers.UserActivity.logout()
@@ -24,7 +24,7 @@ GET		/user/profile			   controllers.UserActivity.profile()
 GET		/user/category/:id 		   controllers.UserActivity.categoryFilter(id: Long)
 
 #Tool
-GET     /tool                      controllers.Tools.index()
+GET     /user/tools                controllers.Tools.index()
 GET     /tool/new                  controllers.Tools.createForm()
 GET     /tool/:id                  controllers.Tools.show(id: Long)
 POST    /tool/:id                  controllers.Tools.delete(id: Long)
