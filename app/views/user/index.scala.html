@@ -20,9 +20,9 @@
                             <div>
                             <br>
                             @if(tool.imgURL.length()==0){
-                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                <a href="/tool/@tool.id"><img class="slide-image" src="http://placehold.it/800x300" alt=""></a>
                             } else {
-                                <img src="@tool.imgURL" alt="">
+                                <a href="/tool/@tool.id"><img src="@tool.imgURL" alt=""></a>
                             }
                             </div>
                             <div class="caption">

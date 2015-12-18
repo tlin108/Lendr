@@ -36,7 +36,6 @@ public class User extends Model {
 
   public String address;
 
-  @Constraints.Required
   public String phoneNum;
 
   public String email;
@@ -60,7 +59,7 @@ public class User extends Model {
   public static User createNewUser(String userName, String password, String firstname, String lastname, String email, String address, String phonenum) {
   	if(password == null || userName == null || firstname == null || lastname == null || phonenum == null ||
             userName.length() < 4 || password.length() < 8 || firstname.length() == 0 || firstname.length() < 2 ||
-            lastname.length() == 0 || lastname.length() < 2 || phonenum.length() == 0 || phonenum.length() < 10) {
+            lastname.length() == 0 || lastname.length() < 2) {
    		return null;
     }
 
