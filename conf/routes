@@ -23,6 +23,10 @@ GET		/user/logout			   controllers.UserActivity.logout()
 GET		/user/profile			   controllers.UserActivity.profile()
 GET		/home/category/:id         controllers.UserActivity.categoryFilter(id: Long)
 
+#About
+GET     /about                     controllers.About.show()
+
+
 #Tool
 GET		/user/tools/category/:id   controllers.Tools.categoryFilter(id: Long)
 GET     /user/tools                controllers.Tools.index()
