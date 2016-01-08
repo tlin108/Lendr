@@ -1,0 +1,82 @@
+@(tools: List[Tool], categories: List[ToolCategory])
+
+@user.main("My Tools") {
+
+	 <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            @tool.sideNavi(categories)
+
+            @if(tools.isEmpty()){
+                <h2 class="white">No tools posted</h2>
+             } else {
+                <h2 class="white">My Tool List</h2>
+                <div class="col-md-9">
+                    @for(tool <- tools) {
+                    <div class="row thumbnail">
+                        <br>
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                            <div>
+                                @if(tool.imgURL.length()==0){
+                                <a href="/tool/@tool.id"><img class="slide-image" src="http://placehold.it/800x300" alt=""></a>
+                                } else {
+                                    <a href="/tool/@tool.id"><img src="@tool.imgURL" alt=""></a>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-5 col-lg-5 col-md-5">
+                            <div class="caption">
+                                <h4><a href="/tool/@tool.id">@tool.name</a>
+                                </h4>
+                                @if(tool.available){
+                                    <h4>Status: Hosting</h4>
+                                } else {
+                                    <h4>Status: On Hold</h4>
+                                }
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-left">Category: @tool.toolcategory.name</p>
+                                <p class="pull-right">@tool.commentList.size() comments</p>
+                                <br><br>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-lg-3 col-md-3">
+                            <form role="form" action="@routes.Tools.delete(tool.id)" method="post">
+                            <a class="btn btn-normal btn-block" href="/tool/lend/@tool.id" id="divider-button">Start Lending</a>
+                            <a class="btn btn-normal btn-block" href="/tool/borrow/@tool.id" id="divider-button">Stop Lending</a>
+                            <button type="button" class="btn btn-red btn-block" data-toggle="modal" data-target="#myModal">Remove Tool</button>
+                            <!-- Button trigger modal -->
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Delete Tool</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p> Are you sure you want to remove ?</p>
+                                    <p> Tool Name: @tool.name</p>
+                                    <p> Tool Category: @tool.toolcategory.name</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-normal" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-red" type="submit">Remove</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            </form>
+                            <br>
+                        </div>
+                    </div>
+                    <hr>
+                    }
+                </div>
+                </div>
+            }
+        </div>
+    </div>
+}

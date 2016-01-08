@@ -1,0 +1,72 @@
+@(tool: Tool, curUser:User)
+
+@user.main("Tool Page"){
+
+	    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+                <div class="thumbnail">
+                        <br>
+                        @if(tool.imgURL.length()==0){
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            } else {
+                                <img src="@tool.imgURL" alt="">
+                            }
+                        <br>
+                    <div class="caption-full">
+                        <div class="col-sm-2">
+                        <p class="pull-left">Owner: @tool.owner.getUserName()</p>
+                        </div>
+                        <div class="col-sm-8">
+                        <h4><a a href="/tool/@tool.id" style="text-align: center;">@tool.name</a></h4>
+                        </div>
+                        @if(tool.available){
+                            @if(tool.owner.getUserName() != curUser.getUserName()){
+                               <div class="col-sm-2">
+                               <a class="btn btn-normal pull-right" href="/tool/borrow/@tool.id">Borrow</a>
+                               </div>
+                            } else {
+                                <div class="col-sm-2">
+                                  <h4 class="pull-right">Hosting</h4>
+                                </div>
+                            }
+                        } else {
+                            <div class="col-sm-2">
+                            <h4 class="pull-right">Not Available</h4>
+                            </div>
+                        } 
+                        <!--
+                        else {
+                        <form role="form" action="@routes.Tools.delete(tool.id)" method="delete"><button class="btn btn-normal pull-right" type="submit">Remove</button></form>
+                        }
+                        -->
+                        <hr>
+                        <p>@tool.description</p>
+                    </div>
+                    <hr>
+                    <div class="ratings">
+                        <p class="pull-left">Category: @tool.toolcategory.name</p>
+                        <p class="pull-right">@tool.commentList.size() comments</p>
+                        <br><br>
+                    </div>
+                </div>
+                <form action="@routes.Comments.create(tool.id)" method="post">
+	                <div class="well">
+	                	@* Display flash messages *@
+		                @if(flash.containsKey("error")) {
+		                    <div style="color:red">
+		                        <p>Error Flash Message:</p>
+		                        @flash.get("error")
+		                    </div>
+		                }
+	                	<textarea type="text" id="body" name="body" placeholder="Comment" class="form-control" rows="2"></textarea><br>
+	                	<button type="submit" class="btn btn-normal">Add Comment</button>
+	                </div>
+                </form>
+        </div>
+
+    </div>
+    <!-- /.container -->
+}

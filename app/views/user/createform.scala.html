@@ -1,13 +1,13 @@
 @* This template does not have parameters *@
 
-@user.main("Welcome new user") {
+@main("Create User") {
 
     <header>
         <div class="container">
             <h1>Welcome new user</h1>
             <br>
-            <p>Start the process for joining Tonari</p>
-            <p>A Community tool sharing project</p>
+            <p>Start the process for joining Lendr</p>
+            <p>A Community tool/equipment sharing project</p>
 
             <div class="container ">
             <form class="form-horizontal" role="form" action="@routes.UserActivity.create()" method="post">
@@ -24,15 +24,13 @@
                 <div class="form-group">
                     <label for="userName" class="col-sm-4 control-label">User Name*</label>
                     <div class="col-sm-4">
-                        <input type="text" id="username" name="userName" placeholder="User Name" class="form-control" autofocus>
-                        <span class="help-block">Minimum 4 characters</span>
+                        <input type="text" id="username" name="userName" placeholder="User Name: Minimum 4 characters" class="form-control" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-4 control-label">Password*</label>
                     <div class="col-sm-4">
-                        <input type="password" id="password" name="password" placeholder="Password" class="form-control">
-                        <span class="help-block">Minimum 8 characters</span>
+                        <input type="password" id="password" name="password" placeholder="Password Minimum 8 characters" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
@@ -60,12 +58,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="phoneNumber" class="col-sm-4 control-label">Phone Number*</label>
+                    <label for="phoneNum" class="col-sm-4 control-label">Phone Number</label>
                     <div class="col-sm-4">
                         <input type="tel" id="phoneNum" name="phoneNum" placeholder="Phone Number" class="form-control">
                     </div>
                 </div>
+                <br>
                 <button type="submit" class="btn btn-xl">Register</button>
+                <div class="divider"></div>
+                <a href="/" class="btn btn-xl">Go Back</a>
             </form> <!-- /form -->
         </div> <!-- ./container -->
         </div>

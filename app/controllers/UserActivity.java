@@ -1,6 +1,9 @@
 package controllers;
 
+import models.Admin;
 import models.User;
+import models.Tool;
+import models.ToolCategory;
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -25,34 +28,45 @@ public class UserActivity extends Controller {
 
     // Route: GET /user/login/form
     //  Display the form for user login form
-    public Result loginForm() { 
+    public Result loginForm() {
     	return ok(views.html.user.loginform.render());
     }
 
     // Route: POST /user/login
     //  Login registered user
     public Result login() {
+        //Create admin credentials
+        Admin admin = new Admin("admin", "adminpass");
+        boolean userLogin = false;
+        boolean adminLogin = false;
+
+        //Get username and password entered by user
         DynamicForm userForm = Form.form().bindFromRequest();
         String username = userForm.data().get("userName");
         String password = userForm.data().get("password");
 
+        //Find unique username from db
         User user = User.find.where().eq("userName", username).findUnique();
 
+        //Authenticate user's password
         if(user != null && user.authenticate(password)) {
-            session("user_id", user.getId().toString());
-            flash("success", "Welcome back " + user.getUserName());
-            return redirect(routes.UserActivity.profile(user.getId()));
-            //return redirect(routes.Application.profile());
+            session("user_id", user.id.toString());
+            flash("success", "Welcome back " + user.userName);
+            userLogin = true;
 
+        //Authenticate admin's password
+        } else if(username.equals(admin.userName) && admin.authenticate(password)) {
+            adminLogin = true;
 
         } else {
             flash("error", "Invalid login. Check your username and password.");
             return redirect(routes.UserActivity.loginForm());
         }
-    }
 
-    public Result profile(Long id) {
-        return ok("Success! You've logged in. Profile Id: " + String.valueOf(id));
+        if(userLogin)
+            return redirect(routes.UserActivity.show());
+        else
+            return redirect(routes.UserActivity.showAdmin());
     }
 
     // Route: POST /user
@@ -76,27 +90,63 @@ public class UserActivity extends Controller {
 
         user.save();
 
-        flash("success", "Welcome new user " + user.getUserName());
-        session("user_id", user.getId().toString());
-        return redirect(routes.UserActivity.show(user.getId()));
-    }
-
-    // Route: GET /users/:id
-    //  Shows the User profile 'id' after registering
-    public Result show(Long id) {
-        return ok("This is the user/:id page for user profile of id: " + String.valueOf(id) + "\n");
+        flash("success", "Welcome new user " + user.userName);
+        session("user_id", user.id.toString());
+        return redirect(routes.UserActivity.show());
     }
 
     // Route: DELETE /user/:id
     //  Delete a User account from data base.
-    public Result delete(Long id) {
+    //@Security.Authenticated(UserAuth.class)
+    public Result delete() {
         return ok();
     }
 
     // Route: PUT   /user/:id
     //  Update a User account by using it's registered form.
-    public Result update(Long id) {
+    //@Security.Authenticated(UserAuth.class)
+    public Result update() {
         return ok();
+    }
+
+    // Route: GET /users/:id
+    //  Shows the User profile 'id'
+    @Security.Authenticated(UserAuth.class)
+    public Result show() {
+        List<Tool> tools = Tool.find.all();
+        List<ToolCategory> categories = ToolCategory.find.all();
+
+        return ok(views.html.user.index.render(tools, categories));
+        
+    }
+    //Route: GET /admin
+    //Shows the admin homepage
+    @Security.Authenticated(UserAuth.class)
+    public Result showAdmin() {
+        return ok(views.html.admin.index.render());
+    }
+
+    //Roure: GET/profile
+    //Shows user profile
+    @Security.Authenticated(UserAuth.class)
+    public Result profile() {
+        Long userId = Long.parseLong(session().get("user_id"));
+        User user = User.find.byId(userId);
+
+        return ok(views.html.user.profile.render(user));
+    }
+
+    public Result categoryFilter(Long id){
+        List<ToolCategory> categories = ToolCategory.find.all();
+        ToolCategory category = ToolCategory.find.byId(id);
+        List<Tool> tools = category.toolList;
+
+        return ok(views.html.user.index.render(tools, categories));
+    }
+
+    public Result logout() {
+        session().remove("user_id");
+        return redirect(routes.Application.index());
     }
 
 }

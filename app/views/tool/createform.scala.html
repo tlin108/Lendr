@@ -1,0 +1,55 @@
+@(categories: List[ToolCategory])
+
+@user.main("Add new tool") {
+
+    <header>
+        <div class="container">
+            <h2>Fill out the form below to add your tool</h2>
+            <br>
+
+            <div class="container ">
+            <form class="form-horizontal" role="form" action="@routes.Tools.create()" method="post">
+                <h2>Tool Registration Form</h2>
+                <p>Fields marked with * are required</p>
+                @* Display flash messages *@
+                @if(flash.containsKey("error")) {
+                    <div style="color:red">
+                        <p>Error Flash Message:</p>
+                        @flash.get("error")
+                    </div>
+                }
+                <br>
+                <div class="form-group">
+                    <label for="name" class="col-sm-4 control-label">Tool Name*</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="name" name="name" placeholder="Tool Name" class="form-control" autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="category_id" class="col-sm-4 control-label">Category*</label>
+                    <div class="col-sm-4 container">
+                        <select name="category_id" id="category" class="form-control">
+                            @for(c <- categories) {
+                                <option value="@c.id">@c.name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-4 control-label">Description*</label>
+                    <div class="col-sm-4">
+                        <textarea type="text" id="description"name="description" placeholder="Description" class="form-control" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="image" class="col-sm-4 control-label">Image URL</label>
+                    <div class="col-sm-4">
+                        <textarea type="text" id="image" name="image" placeholder="Image" class="form-control" autofocus></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-xl">Register Tool</button>
+            </form> <!-- /form -->
+        </div> <!-- ./container -->
+        </div>
+    </header>
+}

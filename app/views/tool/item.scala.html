@@ -1,0 +1,85 @@
+@(tool: Tool, curUser:User, comments:List[Comment])
+
+@user.main("Tool Page"){
+
+	    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+                <div class="thumbnail">
+                        <br>
+                        @if(tool.imgURL.length()==0){
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            } else {
+                                <img src="@tool.imgURL" alt="">
+                            }
+                        <br>
+                    <div class="caption-full">
+                        <div class="col-sm-2">
+                        <p class="pull-left">Owner: @tool.owner.getUserName()</p>
+                        </div>
+                        <div class="col-sm-8">
+                        <h4><a a href="/tool/@tool.id" style="text-align: center;">@tool.name</a></h4>
+                        </div>
+                    	@if(tool.available){
+                            @if(tool.owner.getUserName() != curUser.getUserName()){
+                               <div class="col-sm-2">
+                    	       <a class="btn btn-normal pull-right" href="/tool/borrow/@tool.id">Borrow</a>
+                               </div>
+                            } else {
+                                <div class="col-sm-2">
+                                  <h4 class="pull-right">Hosting</h4>
+                                </div>
+                            }
+                        } else {
+                            <div class="col-sm-2">
+                            <h4 class="pull-right">Borrowed or Not Available</h4>
+                            </div>
+                        } 
+                        <!--
+                        else {
+                        <form role="form" action="@routes.Tools.delete(tool.id)" method="delete"><button class="btn btn-normal pull-right" type="submit">Remove</button></form>
+                        }
+                        -->
+                        <hr>
+                        <p>@tool.description</p>
+                    </div>
+                    <hr>
+                    <div class="ratings">
+                        <p class="pull-left">Category: @tool.toolcategory.name</p>
+                        <p class="pull-right">@tool.commentList.size() comments</p>
+                        <br><br>
+                    </div>
+
+                </div>
+
+                <div class="well">
+
+                    <div class="text-right">
+                        <a class="btn btn-normal" href="/comment/new/@tool.id">Leave a Comment</a>
+                    </div>
+
+                    <hr>
+
+                    @if(comments.isEmpty()){
+                        <h2> No comment posted</h2>
+                    } else {
+                        @for(comment <- comments){
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>@comment.body</p>
+                                    <p>By User: @comment.poster</p>
+                                    <p>At Time: @comment.datetime_posted</p>
+                                </div>
+                            </div>
+                            <hr>
+                        }
+                    }
+                </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+}

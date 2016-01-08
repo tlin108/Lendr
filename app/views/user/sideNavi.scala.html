@@ -1,0 +1,22 @@
+@(categories: List[ToolCategory])
+
+<div class="col-md-3">
+  <p class="lead white">Filter Category By</p>
+  <div class="list-group">
+      <a href="/home" class="list-group-item">No Filter</a>
+  </div>
+  <div class="list-group">
+  	@if(categories.isEmpty()){
+  		<h2 class="white">No category created</h2>
+  	} else {
+  		@for(c <- categories ){
+  			<a href="/home/category/@c.id" class="list-group-item">@c.name</a>
+  		}
+  	}
+  </div>
+  <div class="list-group">
+      <h4><a href="#">Want to add your own tools?</a></h4>
+      <p class="white">Click on the button below to add your own tool for others to borrow!</p>
+      <a class="btn btn-normal" href="@routes.Tools.createForm()">Add Tool</a>
+  </div>
+</div>

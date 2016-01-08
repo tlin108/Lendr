@@ -3,13 +3,31 @@
 
 # --- !Ups
 
+create table comment (
+  id                        bigserial not null,
+  body                      varchar(255),
+  poster                    varchar(255),
+  tool_id                   bigint,
+  datetime_posted           varchar(255),
+  constraint pk_comment primary key (id))
+;
+
 create table tool (
-  id                        varchar(255) not null,
+  id                        bigserial not null,
   name                      varchar(255),
   description               varchar(255),
-  owner                     varchar(255),
-  borrower                  varchar(255),
+  img_url                   varchar(255),
+  available                 boolean,
+  user_id                   bigint,
+  borrower_id               bigint,
+  tool_category_id          bigint,
   constraint pk_tool primary key (id))
+;
+
+create table tool_category (
+  id                        bigserial not null,
+  name                      varchar(255),
+  constraint pk_tool_category primary key (id))
 ;
 
 create table users (
@@ -25,12 +43,24 @@ create table users (
   constraint pk_users primary key (id))
 ;
 
+alter table comment add constraint fk_comment_tool_1 foreign key (tool_id) references tool (id);
+create index ix_comment_tool_1 on comment (tool_id);
+alter table tool add constraint fk_tool_owner_2 foreign key (user_id) references users (id);
+create index ix_tool_owner_2 on tool (user_id);
+alter table tool add constraint fk_tool_borrower_3 foreign key (borrower_id) references users (id);
+create index ix_tool_borrower_3 on tool (borrower_id);
+alter table tool add constraint fk_tool_toolcategory_4 foreign key (tool_category_id) references tool_category (id);
+create index ix_tool_toolcategory_4 on tool (tool_category_id);
 
 
 
 # --- !Downs
 
+drop table if exists comment cascade;
+
 drop table if exists tool cascade;
+
+drop table if exists tool_category cascade;
 
 drop table if exists users cascade;
 

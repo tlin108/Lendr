@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Success!</title>
-</head>
-<body>
+@(loginUser:User)
 
-</body>
-</html>
+@user.main("User Profile Page"){
+	<div class="container">
+		<h4 class="white">Welcome @loginUser.userName !</h4>
+		<hr>
+		<h1 class="white">This is your profile page.<br> Still under construction!</h1>
+	</div>
+}
+
