@@ -4,7 +4,8 @@ import models.User;
 import play.mvc.*;
 
 /**
- * Created by alex_alarcon on 12/18/2015.
+ * This is the About Controller. This is where we implement all of the Action
+ * methods related to operations on the About page.
  */
 public class About extends Controller {
 
