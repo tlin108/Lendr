@@ -56,6 +56,7 @@ public class User extends Model {
   }
 
   public boolean authenticate(String password) {
+
     return BCrypt.checkpw(password, this.password_hash);
   }
 
