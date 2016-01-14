@@ -6,7 +6,8 @@ import play.mvc.Result;
 import play.mvc.Security;
 
 /**
- * Created by alex_alarcon on 12/9/2015.
+ * This is the UserAuth Controller. This is where we implement all of the Action
+ * methods related to operations on user authentication.
  */
 public class UserAuth extends Security.Authenticator {
     // When return is null, Authentication failed
