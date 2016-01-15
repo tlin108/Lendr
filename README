@@ -1,3 +1,26 @@
-Community Tool Sharing Application 
+Lendr (Community Tool Sharing Application)
 
-Developed using the Play Framework with Java in collaboration with tlin108.
+Heroku Link: https://shielded-coast-8191.herokuapp.com/
+
+Lendr Introduction:
+A community tool sharing application 
+built to connect you to people willing to lend a tool or two. 
+
+Whether its a hammer to hang that new picture in your apartment, 
+a snow blower for that rough snow day, 
+or a guitar to jam with a few hours in the park 
+
+We're here to make it happen.
+
+Team:
+tlin108 (Tung Ling Lin)
+alexalarcon1 (Alex Alarcon)
+
+Tech Stack Used:
+Java 
+Play Framework 
+MVC - for programming pattern
+Postgresql - for database
+Git - for version control
+Heroku - for deployment
+
